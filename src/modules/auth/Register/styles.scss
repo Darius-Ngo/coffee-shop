@@ -1,0 +1,31 @@
+@use '../../../scss/' as *;
+
+.wrap-form__register {
+    width: 100%;
+    padding-left: 12px;
+    margin-top: 1rem;
+
+    label {
+        font-weight: bold;
+        font-size: 13px;
+        color: $btn-blue-color;
+    }
+}
+
+.btn-form-register__submit {
+    background-color: $btn-blue-color;
+    color: #fff;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: $btn-blue-color;
+        color: #fff;
+        border-color: $btn-blue-color;
+    }
+}
+
+.btn-form-register__submit,
+.btn-form-register__cancel {
+    border-radius: 6px;
+}

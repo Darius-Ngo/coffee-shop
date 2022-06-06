@@ -1,0 +1,18 @@
+@use'../../../../scss/' as *;
+
+.wrap-sideBar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    width: $sideBar-width;
+    height: 100%;
+    padding-top: $header-height;
+    z-index: 100;
+
+    .sidebar-menu {
+        height: 100%;
+        box-shadow: 0 2px 12px 4px rgba(0, 0, 0, 0.2);
+        padding-top: 2rem;
+    }
+}

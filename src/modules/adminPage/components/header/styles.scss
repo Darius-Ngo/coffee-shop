@@ -1,0 +1,76 @@
+@use'../../../../scss/' as *;
+
+.wrap-header-admin {
+    background-color: #1890ff;
+    height: $header-height;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+
+    .header-item {
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.4rem;
+        margin-right: 12px;
+        padding: 12px;
+        cursor: pointer;
+
+        span.anticon-menu {
+            position: relative;
+            right: 8px;
+        }
+
+    }
+
+    .search-input {
+
+        & .ant-input-search-button {
+            background-color: $btn-blue-color;
+            border-color: $btn-blue-color;
+
+            &:hover {
+                color: $btn-orange-color;
+            }
+        }
+
+        & .ant-input {
+
+            &:hover,
+            &:focus {
+                border-color: #ddd;
+            }
+        }
+    }
+
+    .wrap-icon {
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.4rem;
+        cursor: pointer;
+        margin-left: 20px;
+
+        &:hover {
+            color: $btn-orange-color;
+
+        }
+    }
+
+    .wrap-avatar {
+        margin-left: 20px;
+        cursor: pointer;
+    }
+
+
+}
+
+.menu-item {
+    font-weight: 500;
+    color: #555;
+    font-size: 14;
+
+    &.logout {
+        color: $hover-color;
+    }
+}

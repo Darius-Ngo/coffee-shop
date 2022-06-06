@@ -1,0 +1,12 @@
+@use'../../../../../../scss/' as *;
+
+.header-container {
+  .header-title {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .header-content {
+    @include flex(center, space-between);
+  }
+}

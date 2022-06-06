@@ -1,0 +1,96 @@
+@use '../../../scss/' as *;
+
+.container-app {
+    width: 100%;
+    height: 100vh;
+    @include flex(center, center);
+
+    .wrap-form {
+        @include flex(center, center);
+        width: 70%;
+        height: 75%;
+        background-color: #FBAB7E;
+        background-image: linear-gradient(155deg, #f7ce68 39%, #ffffff 55%);
+        box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.1);
+
+
+        &__border {
+            width: 90%;
+            height: 80%;
+            padding: 4px;
+            border-radius: 2px;
+            background-color: #fff;
+        }
+
+        &__content {
+            @include flex(flex-start, space-between);
+            width: 100%;
+            height: 100%;
+            padding: 2rem 1rem;
+            border: 4px solid #f7ce68;
+
+            &__img {
+                width: 60%;
+            }
+
+            &__form {
+                width: 40%;
+                padding: 0 1rem;
+
+                &__heading {
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    color: $btn-orange-color;
+                    text-align: center;
+                    padding: 8px;
+                }
+
+                .form-content {
+                    width: 100%;
+                    padding-left: 12px;
+                    margin-top: 1rem;
+
+                    label {
+                        font-weight: bold;
+                        font-size: 13px;
+                        color: $btn-blue-color;
+                    }
+
+                    .btn-login {
+                        width: 100%;
+                        margin: auto;
+                        background-color: $btn-orange-color;
+                        border-color: $btn-orange-color;
+                        font-weight: 600;
+                    }
+                }
+
+                &__footer {
+                    @include flex(center, space-between);
+                    font-weight: 600;
+
+                    .register {
+                        font-size: 15px;
+                        color: $btn-orange-color;
+
+                        &:hover {
+                            text-decoration: underline;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .forgot-pass {
+                        font-size: 13px;
+                        color: $btn-blue-color;
+
+                        &:hover {
+                            text-decoration: underline;
+                            cursor: pointer;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
