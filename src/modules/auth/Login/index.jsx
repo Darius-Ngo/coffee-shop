@@ -30,7 +30,6 @@ const LoginForm = () => {
             }
             dispatch(loginStart({ ...body }));
         });
-
     };
 
     useEffect(() => {
@@ -39,6 +38,9 @@ const LoginForm = () => {
                 password: '',
             });
             passWord.current.focus();
+        }
+        if (status === ReduxType.SUCCESS) {
+            navigate('/');
         }
     }, [status])
 

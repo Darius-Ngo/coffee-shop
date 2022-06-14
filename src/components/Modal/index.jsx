@@ -1,4 +1,5 @@
 import { Modal, Button } from 'antd';
+import { SaveOutlined } from '@ant-design/icons';
 import React from 'react';
 import './styles.scss';
 const ModalForm = (props) => {
@@ -20,9 +21,10 @@ const ModalForm = (props) => {
                     : [
                         <div key="footer" className="d-flex justify-content-end">
                             <Button color="primary" key="back" onClick={props.onCancel}>
-                                Đóng(ESC)
+                                Đóng
                             </Button>
                             <Button color="primary" $fill key="submit" onClick={props.onOk}>
+                                <SaveOutlined />
                                 Ghi nhận
                             </Button>
                         </div>,

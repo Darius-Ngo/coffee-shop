@@ -3,6 +3,7 @@ import authSaga from '../modules/auth/saga'
 import userManagerSaga from '../modules/adminPage/pages/user-manager/saga';
 import categoryManagerSaga from '../modules/adminPage/pages/category-manager/saga';
 import productManagerSaga from '../modules/adminPage/pages/product-manager/saga';
+import UserPageSaga from '../modules/userPage/saga';
 
 export default function* rootSaga() {
     yield all([
@@ -10,5 +11,6 @@ export default function* rootSaga() {
         userManagerSaga(),
         categoryManagerSaga(),
         productManagerSaga(),
+        UserPageSaga(),
     ]);
 }

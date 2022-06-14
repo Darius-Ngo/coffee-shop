@@ -1,20 +1,27 @@
-import { Space, Avatar, Input, Dropdown, Menu } from 'antd';
-import { HomeOutlined, CompassOutlined, PhoneOutlined, TeamOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
-import React from 'react';
+import { Space, Avatar, Input, Dropdown, Menu, Badge, Segmented } from 'antd';
+import { HomeOutlined, PhoneOutlined, TeamOutlined, ShoppingCartOutlined, ReadOutlined } from '@ant-design/icons';
+import React, {useState, useEffect} from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import Cart from '../cart';
 import { loginStart } from '../../../auth/redux';
 import './styles.scss';
-import logo from '../../../../assets/img/logo.png';
 
 
 const Header = () => {
+    const location = useLocation();
     const dispatch = useDispatch();
+    const [user, setUser] = useState();
+
     const handleLogout = () => {
         localStorage.clear();
         dispatch(loginStart()); 
         window.location.reload();
     }
+    useEffect(() => {
+        const user = localStorage.getItem('User');
+        setUser(JSON.parse(user));
+    },[])
     const menu = (
         <Menu
             items={[
@@ -48,22 +55,22 @@ const Header = () => {
     const headerList = [
         {
             name: 'Trang chủ',
-            path: '/user',
+            path: '/',
             icon: <HomeOutlined />
         },
         {
-            name: 'Khám phá',
-            path: '/user/explore',
-            icon: <CompassOutlined />
+            name: 'Thực đơn',
+            path: '/menu',
+            icon: <ReadOutlined />
         },
         {
             name: 'Về chúng tôi',
-            path: '/user/about-us',
+            path: '/about-us',
             icon: <TeamOutlined />
         },
         {
             name: 'Liên hệ',
-            path: '/user/contact-us',
+            path: '/contact-us',
             icon: <PhoneOutlined />
         },
     ];
@@ -72,17 +79,16 @@ const Header = () => {
         console.log(value)
     }
 
+    const cartList = JSON.parse(localStorage.getItem('listCart'));
+
     return (
         <div className="wrap-header section section__header">
             <Space>
-                {/* <div className="header-logo">
-                    <img src={logo} alt="logo" />
-                </div> */}
                 {
                     headerList.map((item, i) => (
-                        <Link to={item.path} key={i}>
-                            <div className="header-item" key={i}>{item.icon} {item.name}</div>
-                        </Link>
+                      <Link to={item.path} key={i}>
+                        <div className={`header-item ${location.pathname === item.path ? 'active' : ''}`}>{item.icon} {item.name}</div>
+                      </Link>
                     ))
                 }
             </Space>
@@ -92,17 +98,34 @@ const Header = () => {
                     style={{ width: 460 }}
                     onSearch={onSearch}
                     enterButton
+                    size='large'
                     className='search-input'
                 />
-
-                <div className="wrap-icon">
-                    <ShoppingCartOutlined />
-                </div>
-                <div className="wrap-avatar">
-                    <Dropdown overlay={menu} placement="bottomRight" arrow={{ pointAtCenter: true }}>
-                        <Avatar icon={<UserOutlined />} />
-                    </Dropdown>
-                </div>
+                {user ? (
+                <Badge count={cartList?.length} overflowCount={99} size="middle" className="badge-count">
+                  <Dropdown overlay={Cart} placement="bottomRight" arrow={{ pointAtCenter: true }}>
+                    <div className="wrap-icon">
+                      <ShoppingCartOutlined />
+                    </div>
+                  </Dropdown>
+                </Badge>
+                ) : ''}
+                {
+                    user ? (
+                      <Space>
+                          <div className="name-account">{user?.hoTen}</div>                
+                          <div className="wrap-avatar">
+                              <Dropdown overlay={menu} placement="bottomRight" arrow={{ pointAtCenter: true }}>
+                                  <Avatar size={48} src={'https://co-coffeeshop.herokuapp.com'+user?.avatar} />
+                              </Dropdown>
+                          </div>
+                      </Space>
+                    ) : (
+                      <Link to={'/login'}>
+                        <div className="header-item login-btn">Đăng Nhập</div>
+                      </Link>
+                    )
+                }
             </Space>
         </div>
     )

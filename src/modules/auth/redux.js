@@ -20,6 +20,7 @@ const authSlice = createSlice({
         loginSuccess: (state, action) => {
             state.status = ReduxType.SUCCESS;
             state.data.User = action.payload.nguoiDung;
+            localStorage.setItem('User', JSON.stringify(action.payload.nguoiDung));
             localStorage.setItem('token', action.payload.token);
             localStorage.setItem('authority', action.payload.nguoiDung.phanQuyen);
         },

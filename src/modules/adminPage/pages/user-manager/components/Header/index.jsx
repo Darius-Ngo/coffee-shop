@@ -23,7 +23,7 @@ const Header = () => {
       placeholder="Tìm kiếm theo tên người dùng"
       allowClear
       enterButton="Tìm kiếm"
-      size="middle"
+      size="large"
       style={{width: 500}}
       onSearch={onSearch}
       // enterSearch
@@ -31,7 +31,7 @@ const Header = () => {
     />
       <div className="header-content">
         <div className="header-title">Danh sách người dùng: {listUser.length}</div>
-        <Button type="primary" shape="round" icon={<UserAddOutlined />} size="middle" onClick={() => setShowModal(true)}>
+        <Button type="primary" shape="round" icon={<UserAddOutlined />} size="large" onClick={() => setShowModal(true)}>
           Thêm người dùng
         </Button>
       </div>

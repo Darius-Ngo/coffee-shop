@@ -136,6 +136,7 @@ const ModalAddUser = (props) => {
                     form={form}
                     layout='vertical'
                     className='form-content'
+                    initialValues={{}}
                 >
                     <Row gutter={10}>
                         <Col span={12}>
@@ -246,7 +247,12 @@ const ModalAddUser = (props) => {
                         label='Địa chỉ'
                         name="diaChi"
                     >
-                        <Input.TextArea id='diaChi' className="input-item" allowClear placeholder="địa chỉ" />
+                        <Input.TextArea 
+                        className="input-item" 
+                        allowClear 
+                        placeholder="Địa chỉ" 
+                        style={{ height: 120 }}
+                        />
                     </Form.Item>
                 </Form>
             </div>

@@ -1,0 +1,49 @@
+@use '../../../../scss/' as *;
+
+.footer-container {
+  height: $footer-height;
+  background-color: #53382c;
+  color: #fff;
+
+  .list-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+    padding: 1rem 9rem;
+
+    .mr {
+      margin-right: 24px;
+    }
+
+    .list-icon {
+      font-size: 16px;
+      @include flex(center,center);
+      margin-right: 12px;
+      .box-icon {
+        @include flex(center,center);
+        height: 25px;
+        width: 25px;
+        color: #53382c;
+        background-color: #fff;
+        margin-right: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+          transform: translateY(-4px);
+        }
+      }
+    }
+
+    .content, .content-link {
+      @include flex(center,center);
+      svg {
+        margin-right: 6px;
+      }
+    }
+    .content-link:hover {
+      color: #ffa940;
+    }
+  }
+}

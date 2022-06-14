@@ -27,13 +27,14 @@ const ModalAddProduct = (props) => {
 
     useEffect(() => {
       if (props.productDetail) {
+        setIdcategory(props.productDetail.loaiSanPham.id)
         form.setFieldsValue({
           tenSanPham: props.productDetail.tenSanPham,
           moTa: props.productDetail.moTa,
           giaBanSizeS: props.productDetail.giaBanSizeS,
           giaBanSizeM: props.productDetail.giaBanSizeM,
           giaBanSizeL: props.productDetail.giaBanSizeL,
-          idLoaiSanPham: props.productDetail.idLoaiSanPham,
+          loaiSanPham: props.productDetail.loaiSanPham.tenLoaiSanPham,
         });
         setImg(props.productDetail?.anh);
       } else {
@@ -207,7 +208,12 @@ const ModalAddProduct = (props) => {
                         label='Mô tả'
                         name="moTa"
                     >
-                        <Input.TextArea className="input-item" allowClear placeholder="Mô tả" />
+                        <Input.TextArea 
+                        className="input-item" 
+                        allowClear 
+                        placeholder="Mô tả" 
+                        style={{ height: 120 }}
+                        />
                     </Form.Item>
                 </Form>
           </Spin>

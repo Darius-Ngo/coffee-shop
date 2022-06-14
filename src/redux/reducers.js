@@ -4,9 +4,12 @@ import UserManagerSlice from '../modules/adminPage/pages/user-manager/redux';
 import CategoryManagerSlice from '../modules/adminPage/pages/category-manager/redux';
 import ProductManagerSlice from '../modules/adminPage/pages/product-manager/redux';
 
+import UserPageSlice from '../modules/userPage/redux';
+
 export default combineReducers({
     auth: authSlice,
     userManager: UserManagerSlice,
     categoryManager: CategoryManagerSlice,
     productManager: ProductManagerSlice,
+    userPage: UserPageSlice,
 });

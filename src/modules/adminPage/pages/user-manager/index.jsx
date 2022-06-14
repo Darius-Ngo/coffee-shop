@@ -102,6 +102,7 @@ const UserManager = () => {
       title: 'Thao tác',
       dataIndex: 'operation',
       key: 'operation',
+      width: 100,
       render: (text, record) => (
           <div className="text-center">
               <Space size="small">
@@ -109,7 +110,7 @@ const UserManager = () => {
                     <Button 
                     icon={<InfoCircleOutlined />}
                     className="btn-small btn-info-icon"
-                    size='small'
+                    size='middle'
                     onClick={
                       () => {
                         setShowModalUserDetail(true);
@@ -122,7 +123,7 @@ const UserManager = () => {
                     <Button 
                     icon={<EditOutlined />}
                     className="btn-small btn-edit-icon"
-                    size='small'
+                    size='middle'
                     onClick={
                       () => {
                         setShowModalAddUser(true);
@@ -135,7 +136,7 @@ const UserManager = () => {
                     <Button 
                     icon={<DeleteOutlined />} 
                     className="btn-small btn-delete-icon"
-                    size='small'
+                    size='middle'
                     onClick={() => showPromiseConfirmDeleteUser(record)} 
                      />
                   </Tooltip>

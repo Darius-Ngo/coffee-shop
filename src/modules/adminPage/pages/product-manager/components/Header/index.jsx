@@ -24,7 +24,7 @@ const Header = () => {
       placeholder="Tìm kiếm theo tên sản phẩm"
       allowClear
       enterButton="Tìm kiếm"
-      size="middle"
+      size="large"
       style={{width: 500}}
       onSearch={onSearch}
       // enterSearch
@@ -36,7 +36,7 @@ const Header = () => {
         type="primary" 
         shape="round" 
         icon={<PlusCircleOutlined />} 
-        size="middle" 
+        size="large" 
         onClick={() => setShowModal(true)}
         >
           Thêm sản phẩm

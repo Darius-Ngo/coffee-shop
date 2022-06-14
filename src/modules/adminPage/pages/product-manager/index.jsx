@@ -54,7 +54,7 @@ const ProductManager = () => {
       title: 'Ảnh',
       dataIndex: 'anh',
       key: 'anh',
-      width: '20%',
+      width: '15%',
       render: (record) => (
         <div className="text-center">
           <Image
@@ -69,6 +69,9 @@ const ProductManager = () => {
       dataIndex: 'loaiSanPham',
       key: 'loaiSanPham',
       width: '20%',
+      render: (record) => (
+        <div>{record.tenLoaiSanPham}</div>
+      )
     },
     {
       title: 'Tên sản phẩm',
@@ -116,7 +119,7 @@ const ProductManager = () => {
                     <Button 
                     icon={<EditOutlined />}
                     className="btn-small btn-edit-icon"
-                    size='small'
+                    size='middle'
                     onClick={
                       () => {
                         setProductDetail(record);
@@ -129,7 +132,7 @@ const ProductManager = () => {
                     <Button 
                     icon={<DeleteOutlined />} 
                     className="btn-small btn-delete-icon"
-                    size='small'
+                    size='middle'
                     onClick={() => showPromiseConfirmDelete(record)} 
                      />
                   </Tooltip>

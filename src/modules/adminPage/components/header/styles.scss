@@ -58,11 +58,15 @@
     }
 
     .wrap-avatar {
-        margin-left: 20px;
         cursor: pointer;
     }
 
-
+    & .name-account {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fff;
+        margin-left: 20px;
+    }
 }
 
 .menu-item {

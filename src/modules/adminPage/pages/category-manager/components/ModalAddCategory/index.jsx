@@ -138,7 +138,12 @@ const ModalAddUser = (props) => {
                         label='Mô tả'
                         name="moTa"
                     >
-                        <Input.TextArea className="input-item" allowClear />
+                        <Input.TextArea 
+                        className="input-item" 
+                        allowClear 
+                        placeholder="Mô tả" 
+                        style={{ height: 120 }}
+                        />
                     </Form.Item>
                 </Form>
           </Spin>

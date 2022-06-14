@@ -87,7 +87,7 @@ const CategoryManager = () => {
                     <Button 
                     icon={<EditOutlined />}
                     className="btn-small btn-edit-icon"
-                    size='small'
+                    size='middle'
                     onClick={
                       () => {
                         setShowModalAddCategory(true);
@@ -100,7 +100,7 @@ const CategoryManager = () => {
                     <Button 
                     icon={<DeleteOutlined />} 
                     className="btn-small btn-delete-icon"
-                    size='small'
+                    size='middle'
                     onClick={() => showPromiseConfirmDeleteCategory(record)} 
                      />
                   </Tooltip>

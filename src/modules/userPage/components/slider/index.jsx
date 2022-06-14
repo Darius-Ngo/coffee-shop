@@ -1,19 +1,24 @@
-import React from 'react';
+import {Spin} from 'antd';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Link} from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay } from 'swiper';
-import slide_1 from '../../../../assets/img/slide-1.png';
-import slide_2 from '../../../../assets/img/slide-2.png';
-import slide_3 from '../../../../assets/img/slide-3.png';
-import slide_4 from '../../../../assets/img/slide-4.png';
+import {getListCategoryStart} from '../../redux';
 import './styles.scss';
 
-const index = () => {
-    const sliderList = [
-        , slide_1, slide_2, slide_3, slide_4
-    ]
-    SwiperCore.use([Autoplay])
+const Slider = () => {
+    SwiperCore.use([Autoplay]);
+    const dispatch = useDispatch();
+    const {status, data: {listCategory}} = useSelector((state) => state.userPage);
+
+    useEffect(() => {
+        dispatch(getListCategoryStart())
+    },[]);
+
     return (
         <div className="wrap-slider">
+            <Spin spinning={status === "loading" || !listCategory}>
             <Swiper
                 modules={[Autoplay]}
                 grabCursor={true}
@@ -21,21 +26,30 @@ const index = () => {
                 slidesPerView={1}
                 autoplay={{ delay: 3000 }}
             >
-                {sliderList.map((item, i) => (
+                {listCategory.map((item, i) => (
                     <SwiperSlide key={i}>
                         {({ isActive }) => (
-                            <div
-                                className={`slide-item ${isActive ? 'active' : ''}`}
-                                style={{ backgroundImage: `url(${item})` }}
-                            >
-                                {/* <img src={item} alt="" /> */}
-                            </div>
+                          <SliderItem item={item} active={isActive}/>
                         )}
                     </SwiperSlide>
                 ))}
             </Swiper>
+            </Spin>
         </div>
     )
 }
 
-export default index
+export default Slider;
+
+const SliderItem = (props) => {
+    return (
+      <div
+          className={`slide-item ${props.active ? 'active' : ''}`}
+          style={{ backgroundImage: `url(https://co-coffeeshop.herokuapp.com${props.item.anh})` }}
+      >
+          <Link to={`/menu/${props.item.id}`}>
+            <button className="btn-explore">XEM SẢN PHẨM</button>
+          </Link>
+      </div>        
+    )
+}

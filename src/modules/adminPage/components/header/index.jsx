@@ -1,13 +1,16 @@
-import { Space, Avatar, Input, Dropdown, Menu } from 'antd';
-import { BellOutlined, UserOutlined, MenuOutlined } from '@ant-design/icons';
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Space, Avatar, Input, Dropdown, Menu, Badge } from 'antd';
+import { BellOutlined, MenuOutlined, SettingOutlined } from '@ant-design/icons';
+import React, {useState, useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
+import { useDispatch} from 'react-redux';
 import { loginStart } from '../../../auth/redux';
 import './styles.scss';
 
 const Header = (props) => {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
+
+    const [user, setUser] = useState();
 
     const handleToggleMenu = () => {
         if (props.onClick) props.onClick();
@@ -16,8 +19,14 @@ const Header = (props) => {
     const handleLogout = () => {
         localStorage.clear();
         dispatch(loginStart()); 
+        navigate('/');
         window.location.reload();
     }
+    useEffect(() => {
+        const user = localStorage.getItem('User');
+        setUser(JSON.parse(user));
+    },[])
+
 
     const menu = (
         <Menu
@@ -61,21 +70,29 @@ const Header = (props) => {
             </Space>
             <Space>
                 <Input.Search
-                    placeholder="Tìm kiếm sản phẩm"
-                    style={{ width: 460 }}
+                    placeholder="Tìm kiếm "
+                    style={{ width: 300 }}
                     onSearch={onSearch}
                     enterButton
+                    size="large"
                     className='search-input'
                 />
-
+                <Badge count={5} overflowCount={99} size="small">
                 <div className="wrap-icon">
                     <BellOutlined />
                 </div>
-                <div className="wrap-avatar">
-                    <Dropdown overlay={menu} placement="bottomRight" arrow={{ pointAtCenter: true }}>
-                        <Avatar icon={<UserOutlined />} />
-                    </Dropdown>
+                </Badge>
+                <div className="wrap-icon">
+                    <SettingOutlined />
                 </div>
+                <Space>
+                    <div className="name-account">{user?.hoTen}</div>                
+                    <div className="wrap-avatar">
+                        <Dropdown overlay={menu} placement="bottomRight" arrow={{ pointAtCenter: true }}>
+                            <Avatar size={48} src={'https://co-coffeeshop.herokuapp.com'+user?.avatar} />
+                        </Dropdown>
+                    </div>
+                </Space>
             </Space>
         </div>
     )
