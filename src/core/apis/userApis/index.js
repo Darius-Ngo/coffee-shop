@@ -40,8 +40,8 @@ export const GetXaPhuongApi = async (id) => {
   return res.data;
 };
 
-export const DatHangApi = async () => {
-  const res = await axiosClient.post(datHangUrl);
+export const DatHangApi = async (data) => {
+  const res = await axiosClient.post(datHangUrl, data);
   if (!res || !res.data) throw new Error('Opps');
   return res.data;
 };
@@ -52,8 +52,8 @@ export const GetListCartApi = async (id) => {
   return res.data;
 };
 
-export const insertCartApi = async (id) => {
-  const res = await axiosClient.post(insertCartUrl+id);
+export const insertCartApi = async (data) => {
+  const res = await axiosClient.post(insertCartUrl, data);
   if (!res || !res.data) throw new Error('Opps');
   return res.data;
 };

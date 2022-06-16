@@ -1,9 +1,9 @@
 import { Tooltip, Empty, Spin } from "antd";
 import { MdDeleteOutline } from "react-icons/md";
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
-import {getListCartStart, deleteCartStart} from '../../redux'
+import {getListCartStart, deleteCartStart} from '../../redux';
 import "./styles.scss";
 
 const CartSmall = () => {
@@ -14,11 +14,9 @@ const CartSmall = () => {
   } = useSelector((state) => state.userPage);
   const User = JSON.parse(localStorage.getItem("User"));
 
-  useEffect(() => {
-    if (User) {
-      dispatch(getListCartStart(User.id));
-    }
-  }, []);
+  const handleDelete = (id) => {
+    dispatch(deleteCartStart(id));
+  }
 
   return (
     <div className="cart-wrap">
@@ -30,14 +28,14 @@ const CartSmall = () => {
               <div className="cart-item" key={index}>
                 <div className="cart-item__img">
                   <img
-                    src={"https://co-coffeeshop.herokuapp.com" + item?.anh}
-                    alt={item.tenSanPham}
+                    src={"https://co-coffeeshop.herokuapp.com" + item?.sanPham.anh}
+                    alt={item.sanPham.tenSanPham}
                   />
                 </div>
-                <div className="cart-item__content">{item.tenSanPham}</div>
-                <div className="cart-item__price">{item.gia} VNĐ</div>
+                <div className="cart-item__content">{item?.sanPham?.tenSanPham}</div>
+                <div className="cart-item__price">{item?.giaBan} VNĐ</div>
                 <Tooltip placement="right" title="Xóa sản phẩm" color="#f5222d">
-                  <div className="cart-item__delete">
+                  <div className="cart-item__delete" onClick={() => handleDelete(item?.id)}>
                     <MdDeleteOutline />
                   </div>
                 </Tooltip>

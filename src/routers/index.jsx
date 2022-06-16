@@ -16,11 +16,10 @@ function AppRouter() {
             switch (authority) {
                 case 'ADMIN':
                     setAdmin(true);
-                    // navigate("/", { replace: true });
                     break;
                 case 'USER':
                     setAdmin(false);
-                    // navigate("/");
+                    navigate("/menu");
                     break;
             }
         }

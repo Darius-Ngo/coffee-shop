@@ -14,6 +14,7 @@ const ProductPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {status, data: {listProduct, productDetail}} = useSelector((state) => state.userPage);
+  const User = JSON.parse(localStorage.getItem('User'));
 
   const [sizeSelect, setSizeSelect] = useState(1);
   const [price, setPrice] = useState();
@@ -52,11 +53,9 @@ const ProductPage = () => {
     const user = JSON.parse(localStorage.getItem('User'));
     if(user && productDetail) {
       const body = {
-        id: productDetail?.id,
-        tenSanPham: productDetail?.tenSanPham,
-        anh: productDetail.anh,
-        gia: price,
-        size: sizeSelect,
+        idSanPham: productDetail?.id,
+        kichCo: sizeSelect,
+        idNguoiDung: User.id
       }
       dispatch(insertCartStart(body));
     } else {

@@ -39,6 +39,7 @@ const ModalAddProduct = (props) => {
         setImg(props.productDetail?.anh);
       } else {
         form.resetFields();
+        setImg('');
       }
     }, [props.productDetail, props.visible]);
 

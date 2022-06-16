@@ -17,7 +17,7 @@ const MenuPage = () => {
   return (
     <div className="menu-page-container">
       <Spin spinning={status === "loading"}>
-        {listCategory.length && listCategory.map((category, i) =>(
+        {listCategory?.map((category, i) =>(
           <CategoryItem key={i} category={category}/>
         ))}
       </Spin>

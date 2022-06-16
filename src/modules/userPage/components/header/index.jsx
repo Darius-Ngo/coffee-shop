@@ -1,27 +1,35 @@
-import { Space, Avatar, Input, Dropdown, Menu, Badge, Segmented } from 'antd';
-import { HomeOutlined, PhoneOutlined, TeamOutlined, ShoppingCartOutlined, ReadOutlined } from '@ant-design/icons';
+import { Space, Avatar, Input, Dropdown, Menu, Badge, Spin } from 'antd';
+import { HomeOutlined, CommentOutlined, TeamOutlined, ShoppingCartOutlined, ReadOutlined } from '@ant-design/icons';
 import React, {useState, useEffect} from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
-import Cart from '../cart';
-import { loginStart } from '../../../auth/redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import CartSmall from '../CartSmall';
+import {getListCartStart, deleteCartStart} from '../../redux';
+import { logoutStart } from '../../../auth/redux';
 import './styles.scss';
 
 
 const Header = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [user, setUser] = useState();
-
+    const {
+        status,
+        data: { listCart },
+      } = useSelector((state) => state.userPage);
+    const user = JSON.parse(localStorage.getItem("User"));
+    useEffect(() => {
+      if (user) {
+        dispatch(getListCartStart(user.id));
+      }
+    }, []);
     const handleLogout = () => {
         localStorage.clear();
-        dispatch(loginStart()); 
+        dispatch(logoutStart()); 
+        navigate('/menu');
         window.location.reload();
     }
-    useEffect(() => {
-        const user = localStorage.getItem('User');
-        setUser(JSON.parse(user));
-    },[])
+    
     const menu = (
         <Menu
             items={[
@@ -64,22 +72,20 @@ const Header = () => {
             icon: <ReadOutlined />
         },
         {
+            name: 'Tin tức',
+            path: '/news',
+            icon: <CommentOutlined />
+        },
+        {
             name: 'Về chúng tôi',
             path: '/about-us',
             icon: <TeamOutlined />
-        },
-        {
-            name: 'Liên hệ',
-            path: '/contact-us',
-            icon: <PhoneOutlined />
         },
     ];
 
     const onSearch = (value) => {
         console.log(value)
     }
-
-    const cartList = JSON.parse(localStorage.getItem('listCart'));
 
     return (
         <div className="wrap-header section section__header">
@@ -102,8 +108,8 @@ const Header = () => {
                     className='search-input'
                 />
                 {user ? (
-                <Badge count={cartList?.length} overflowCount={99} size="middle" className="badge-count">
-                  <Dropdown overlay={Cart} placement="bottomRight" arrow={{ pointAtCenter: true }}>
+                <Badge count={listCart?.length} overflowCount={99} size="middle" className="badge-count">
+                  <Dropdown overlay={<CartSmall/>} placement="bottomRight" arrow={{ pointAtCenter: true }}>
                     <div className="wrap-icon">
                       <ShoppingCartOutlined />
                     </div>

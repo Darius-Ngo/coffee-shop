@@ -1,14 +1,40 @@
-import { Row, Col, Spin, InputNumber, Tooltip } from "antd";
-import React, { useState, useEffect } from "react";
+import { Row, Col, Form, InputNumber, Tooltip } from "antd";
+import { DeleteOutlined } from '@ant-design/icons';
 import { MdDeleteOutline } from "react-icons/md";
+import confirm from 'antd/lib/modal/confirm';
+import React, { useState, useEffect } from "react";
+import {useDispatch, useSelector} from 'react-redux';
+import {getRegexNumber} from '../../../../../common/regexCommon';
+import {deleteCartStart} from '../../../../redux';
 import { Link } from "react-router-dom";
 
 const CartItem = (props) => {
+  const dispatch = useDispatch();
   const [num, setNum] = useState(1);
   const { item, Change, index } = props;
   const selectNum = (value) => {
     setNum(value);
     Change((index + 1) * value);
+  };
+  const handleDelete = (productData) => {
+    confirm({
+      title: 'Xoá sản phẩm ',
+      icon: <DeleteOutlined color="red" />,
+      width: '600px',
+      content: (
+        <div>
+          Bạn có chắc chắn muốn xoá sản phẩm
+          <strong style={{color: '#f5222d'}}> {productData?.sanPham.tenSanPham} </strong>
+          không?
+        </div>
+      ),
+      okText: 'Đồng ý',
+      cancelText: 'Hủy',
+      onOk() {
+        dispatch(deleteCartStart(productData.id));
+      },
+      onCancel() {},
+    });
   };
   return (
     <div className="product-item">
@@ -38,7 +64,20 @@ const CartItem = (props) => {
         </Col>
         <Col md={4}>
           <div className="product-num product-item__content">
-            <InputNumber min={1} value={num} onChange={selectNum} />
+            <Form.Item 
+            name={`soLuong${index}`}
+            rules={[
+              {
+                required: true,
+                message: 'Nhập số lượng!',
+              },
+              {
+                pattern: getRegexNumber(),
+                message: 'Chỉ nhập số!',
+              },
+            ]}> 
+              <InputNumber min={1} defaultValue={1} value={num} onChange={selectNum} />
+            </Form.Item>
           </div>
         </Col>
         <Col md={3}>
@@ -48,7 +87,7 @@ const CartItem = (props) => {
           </strong>
         </Col>
         <Col md={2}>
-          <div className="product-delete product-item__content">
+          <div className="product-delete product-item__content" onClick={() => handleDelete(item)}>
             <Tooltip placement="right" title="Xóa sản phẩm" color="#f5222d">
               <MdDeleteOutline />
             </Tooltip>

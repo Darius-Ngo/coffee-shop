@@ -25,6 +25,7 @@ const ModalAddUser = (props) => {
         });
         setImg(props.categoryDetail.anh);
       } else {
+        setImg('');
         form.resetFields();
       }
     }, [props.categoryDetail, props.visible]);

@@ -14,7 +14,6 @@ const initialState = {
     },
     status: ReduxType.INIT
 }
-
 const userPageSlice = createSlice({
     name: 'userPage',
     initialState,

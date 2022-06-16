@@ -71,6 +71,7 @@ const RegisterForm = (props) => {
                     form={form}
                     layout='vertical'
                     className='form-content'
+                    initialValues={{}}
                 >
                     <Form.Item
                         label='Họ tên'
@@ -95,6 +96,7 @@ const RegisterForm = (props) => {
                     <Form.Item
                         label='Tên tài khoản'
                         name="username"
+                        defaultValue=''
                         rules={[{ required: true, message: 'Nhập tên tài khoản!' }]}
                     >
                         <Input id='username' className="input-item" allowClear />
@@ -102,6 +104,7 @@ const RegisterForm = (props) => {
                     <Form.Item
                         label='Mật khẩu'
                         name="password"
+                        defaultValue=''
                         rules={[
                         { required: true, message: 'Nhập mật khẩu!' },
                         {

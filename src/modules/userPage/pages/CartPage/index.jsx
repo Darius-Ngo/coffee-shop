@@ -1,20 +1,22 @@
-import { Row, Col, Spin } from "antd";
+import { Row, Col, Spin, Form } from "antd";
 import { ImLocation2 } from "react-icons/im";
 import React, { useState, useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {getListCartStart, deleteCartStart} from '../../redux';
+import {getListCartStart, datHangStart} from '../../redux';
 import CartItem from "./components/CartItem";
 import ModalSelectLocal from "./components/ModalSelectLocal";
 import "./styles.scss";
 const CartPage = () => {
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
   const [sumBill, setSumBill] = useState(0);
   const [changePrice, setChangePrice] = useState(0);
   const [showModalSelectLocal, setShowModalSelectLocal] = useState(false);
 
   const {status, data: {listCart}} = useSelector((state) => state.userPage);
+  const diaChi = localStorage.getItem("diaChi");
+  const info = JSON.parse(localStorage.getItem("info"));
   const User = JSON.parse(localStorage.getItem('User'));
-
   useEffect(() => {
     if(User) {
       dispatch(getListCartStart(User.id));
@@ -29,18 +31,35 @@ const CartPage = () => {
     });
     let sum = newList.reduce((pre, curr) => +(pre + +curr), 0);
     setSumBill(sum);
-  }, [changePrice]);
+  }, [changePrice, listCart]);
 
   const handleSubmit = () => {
     if(!info) {
       setShowModalSelectLocal(true);
     }else {
-
+      form.validateFields().then(() => {
+        const value = form.getFieldsValue(true);
+        const listProduct = [];
+        listCart.map((item, i) => {
+          listProduct.push({
+            idSanPham: item.id,
+            kichCo: item.kichCo,
+            soLuong: value['soLuong'+i],
+          })
+        })
+        const body = {
+          idNguoiDat: User.id,
+          tenNguoiNhan: info.tenNguoiNhan,
+          diaChiGiaoHang: diaChi,
+          sdtNguoiNhan: info.sdtNguoiNhan,
+          ghiChu: info.ghiChu,
+          thongTinThem: '',
+          chiTietDatHangInputList: listProduct,
+        }
+        dispatch(datHangStart({ ...body }));
+      });
     }
   };
-
-  const diaChi = localStorage.getItem("diaChi");
-  const info = JSON.parse(localStorage.getItem("info"));
 
   return (
     <div className="cart-page-container">
@@ -91,6 +110,7 @@ const CartPage = () => {
             </Row>
           </div>
           <div className="cart-content">
+          <Form form={form}>
             {listCart &&
               listCart.map((item, i) => (
                 <CartItem
@@ -100,6 +120,7 @@ const CartPage = () => {
                   Change={(value) => setChangePrice(value)}
                 />
               ))}
+          </Form>
           </div>
           <div className="cart-order">
             <div className="sum-bill">

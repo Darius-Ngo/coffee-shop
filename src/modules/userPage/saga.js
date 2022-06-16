@@ -1,6 +1,5 @@
 import { all, call, put, takeLatest } from "@redux-saga/core/effects";
 import { toast } from "react-toastify";
-import {message} from 'antd';
 import {
   GetListProductByCategoryIdApi,
   GetListCategoryApi,
@@ -73,7 +72,7 @@ function* getListCategorySaga(action) {
     }
   } catch (error) {
     yield put({ type: getListCategoryFailed, payload: error });
-    toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
   }
 }
 
@@ -88,7 +87,7 @@ function* getCategoryByIdSaga(action) {
     }
   } catch (error) {
     yield put({ type: getCategoryByIdFailed, payload: error });
-    toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
   }
 }
 
@@ -103,7 +102,7 @@ function* getListProductSaga(action) {
     }
   } catch (error) {
     yield put({ type: getListProductFailed, payload: error });
-    toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
   }
 }
 
@@ -118,7 +117,7 @@ function* getProductByIdSaga(action) {
     }
   } catch (error) {
     yield put({ type: getProductByIdFailed, payload: error });
-    toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
   }
 }
 
@@ -133,7 +132,7 @@ function* getTinhThanhSaga(action) {
     }
   } catch (error) {
     yield put({ type: getTinhThanhFailed, payload: error });
-    toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
   }
 }
 
@@ -148,7 +147,7 @@ function* getQuanHuyenSaga(action) {
     }
   } catch (error) {
     yield put({ type: getQuanHuyenFailed, payload: error });
-    toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
   }
 }
 function* getXaPhuongSaga(action) {
@@ -162,7 +161,7 @@ function* getXaPhuongSaga(action) {
     }
   } catch (error) {
     yield put({ type: getXaPhuongFailed, payload: error });
-    toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
   }
 }
 
@@ -177,52 +176,58 @@ function* getListCartSaga(action) {
     }
   } catch (error) {
     yield put({ type: getListCartFailed, payload: error });
-    toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
   }
 }
 function* insertCartSaga(action) {
+  const User = JSON.parse(localStorage.getItem('User'));
   try {
     const res = yield call(insertCartApi, action.payload);
     if (res.ok) {
       yield put({ type: insertCartSuccess, payload: res.data });
-      message.success('Thêm sản phẩm vào giỏ thành công.');
+      toast.success('Thêm sản phẩm vào giỏ thành công.', options);
+      yield put({ type: getListCartStart.type, payload: User.id });
     } else {
       yield put({ type: insertCartFailed, payload: res.message });
       toast.error(res.message, options);
     }
   } catch (error) {
     yield put({ type: insertCartFailed, payload: error });
-    toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
   }
 }
 function* deleteCartSaga(action) {
+  const User = JSON.parse(localStorage.getItem('User'));
   try {
     const res = yield call(deleteCartApi, action.payload);
     if (res.ok) {
       yield put({ type: deleteCartSuccess, payload: res.data });
-      message.success('Xóa sản phẩm khỏi giỏ thành công.');
+      toast.success('Xóa sản phẩm khỏi giỏ thành công.', options);
+      yield put({ type: getListCartStart.type, payload: User.id });
     } else {
       yield put({ type: deleteCartFailed, payload: res.message });
       toast.error(res.message, options);
     }
   } catch (error) {
     yield put({ type: deleteCartFailed, payload: error });
-    toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
   }
 }
 function* datHangSaga(action) {
+  const User = JSON.parse(localStorage.getItem('User'));
   try {
     const res = yield call(DatHangApi, action.payload);
     if (res.ok) {
       yield put({ type: datHangSuccess, payload: res.data });
-      message.success('Đặt hàng thành công.');
+      toast.success('Đặt hàng thành công.', options);
+      yield put({ type: getListCartStart.type, payload: User.id });
     } else {
       yield put({ type: datHangFailed, payload: res.message });
       toast.error(res.message, options);
     }
   } catch (error) {
     yield put({ type: datHangFailed, payload: error });
-    toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
   }
 }
 

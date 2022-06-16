@@ -59,6 +59,7 @@ const LoginForm = () => {
                                     form={form}
                                     layout='vertical'
                                     className='form-content'
+                                    initialValues={{}}
                                 >
                                     <Form.Item
                                         label='Tên tài khoản'

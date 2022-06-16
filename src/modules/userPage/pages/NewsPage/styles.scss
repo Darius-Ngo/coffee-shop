@@ -1,0 +1,75 @@
+@use "../../../../scss/" as *;
+
+.info-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 7rem 3rem 2rem;
+  .info-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #612500;
+    margin-bottom: 1rem;
+  }
+  .info-row {
+    @include flex(center, space-between);
+    flex-wrap: wrap;
+    .info-card {
+      width: 32%;
+      margin-bottom: 2rem;
+
+      .info-img {
+        overflow: hidden;
+        img {
+          object-fit: cover;
+          transition: all 0.3s;
+        }
+        &:hover {
+          img {
+            transform: scale(1.1);
+          }
+        }
+      }
+      .info-content {
+        color: #333;
+        font-size: 16px;
+        font-weight: bold;
+        transition: all 0.3s;
+        margin: 12px 0;
+        &:hover {
+          color: #cf1322;
+        }
+      }
+      .info-date {
+        @include flex(center, flex-start);
+        svg {
+          color: #f5222d;
+          margin-right: 6px;
+        }
+        &__content {
+          color: #595959;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .see-more {
+    margin: 1rem 0 2rem;
+    @include flex(center, center);
+    &__btn {
+      padding: 8px 40px;
+      border-radius: 6px;
+      background-color: #fff;
+      border: 1px solid #873800;
+      color: #873800;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        border: 1px solid #a8071a;
+        background-color: #a8071a;
+        color: #fff;
+      }
+    }
+  }
+}

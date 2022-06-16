@@ -34,7 +34,7 @@ function* loginSaga(action) {
         }
     } catch (error) {
         yield put({ type: loginFailed, payload: error });
-        toast.error('có lỗi xảy ra vui lòng liên hệ quản trị viên!', options);
+        // toast.error('có lỗi xảy ra vui lòng liên hệ quản trị viên!', options);
     }
 }
 
@@ -50,7 +50,7 @@ function* registersSaga(action) {
         }
     } catch (error) {
         yield put({ type: registerFailed.type, payload: error });
-        toast.error('có lỗi xảy ra vui lòng liên hệ quản trị viên!', options);
+        // toast.error('có lỗi xảy ra vui lòng liên hệ quản trị viên!', options);
     }
 }
 

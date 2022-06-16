@@ -5,6 +5,7 @@ import MenuPage from './pages/MenuPage';
 import ProductDetail from './pages/ProductDetail';
 import ProductPage from './pages/ProductPage';
 import CartPage from './pages/CartPage';
+import NewsPage from './pages/NewsPage';
 import NotFoundPage from '../../components/notFoundPage';
 
 const UserRouter = () => {
@@ -24,6 +25,9 @@ const UserRouter = () => {
             />
             <Route path='/cart'
                 element={<CartPage />}
+            />
+            <Route path='/news'
+                element={<NewsPage />}
             />
             <Route path='/*'
                 element={<NotFoundPage />}
