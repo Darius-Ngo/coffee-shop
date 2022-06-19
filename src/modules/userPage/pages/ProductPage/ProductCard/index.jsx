@@ -16,7 +16,7 @@ const ProductCard = (props) => {
       <Link to={`/product/${product.id}`}>
       <div className="product-name">{product.tenSanPham}</div>
       </Link>
-      <div className="product-price">Giá <span>: {product.giaBanSizeS} VNĐ</span></div>
+      <div className="product-price">Giá <span>: {(product.giaBanSizeS)?.toLocaleString('vi', {style : 'currency', currency : 'VND'})}</span></div>
     </div>
   )
 }

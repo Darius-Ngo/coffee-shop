@@ -29,7 +29,7 @@ const CartPage = () => {
     listItem?.forEach((item) => {
       newList.push(item.innerText);
     });
-    let sum = newList.reduce((pre, curr) => +(pre + +curr), 0);
+    let sum = newList.reduce((pre, curr) => +(pre + (+curr)), 0);
     setSumBill(sum);
   }, [changePrice, listCart]);
 
@@ -125,7 +125,7 @@ const CartPage = () => {
           <div className="cart-order">
             <div className="sum-bill">
               <div className="title">Tổng thanh toán: </div>
-              <div className="bill">{sumBill}đ</div>
+              <div className="bill">{(sumBill.toLocaleString('vi', {style : 'currency', currency : 'VND'}))}</div>
             </div>
             <div className="btn-buy" onClick={handleSubmit}>
               ĐẶT MUA NGAY

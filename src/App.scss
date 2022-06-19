@@ -88,6 +88,12 @@ iframe {
 }
 
 .admin-page {
+  .heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+  }
   .ant-table-container table > thead > tr:first-child th {
     &:first-child {
       border-top-left-radius: 10px;

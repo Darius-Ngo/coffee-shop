@@ -12,7 +12,7 @@ import img_7 from "../../../../assets/img/news/img-7.jpg";
 import img_8 from "../../../../assets/img/news/img-8.png";
 import img_9 from "../../../../assets/img/news/img-9.jpg";
 
-const HomePage = () => {
+const NewsPage = () => {
   const listNews = [
     {
       src: img_1,
@@ -88,4 +88,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default NewsPage;

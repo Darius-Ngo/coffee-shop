@@ -88,7 +88,7 @@ const ProductPage = () => {
                   <Radio.Group options={options} onChange={onSelectSize} value={sizeSelect} optionType="button" />
                 </div>
                 <div className="product-price">
-                  <span className="title">Giá: </span><strong>{price} VNĐ</strong>
+                  <span className="title">Giá: </span><strong>{(price)?.toLocaleString('vi', {style : 'currency', currency : 'VND'})}</strong>
                 </div>
               </div>
             </div>
@@ -130,7 +130,7 @@ const ProductCard = (props) => {
       <Link to={`/product/${product.id}`}>
       <div className="product-name">{product.tenSanPham}</div>
       </Link>
-      <div className="product-price">Giá <span>: {product.giaBanSizeS} VNĐ</span></div>
+      <div className="product-price">Giá <span>: {(product.giaBanSizeS).toLocaleString('vi', {style : 'currency', currency : 'VND'})}</span></div>
     </div>
   )
 }

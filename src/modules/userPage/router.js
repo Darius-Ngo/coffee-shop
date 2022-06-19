@@ -6,6 +6,7 @@ import ProductDetail from './pages/ProductDetail';
 import ProductPage from './pages/ProductPage';
 import CartPage from './pages/CartPage';
 import NewsPage from './pages/NewsPage';
+import AboutUsPage from './pages/AboutUsPage';
 import NotFoundPage from '../../components/notFoundPage';
 
 const UserRouter = () => {
@@ -28,6 +29,9 @@ const UserRouter = () => {
             />
             <Route path='/news'
                 element={<NewsPage />}
+            />
+            <Route path='/about-us'
+                element={<AboutUsPage />}
             />
             <Route path='/*'
                 element={<NotFoundPage />}

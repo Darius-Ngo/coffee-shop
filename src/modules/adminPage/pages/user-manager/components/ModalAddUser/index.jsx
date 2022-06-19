@@ -16,15 +16,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { insertStart, updateStart } from "../../redux";
-import {getRegexMobile} from '../../../../../common/regexCommon';
+import { getRegexMobile } from "../../../../../common/regexCommon";
 import Modal from "../../../../../../components/Modal";
 
 const ModalAddUser = (props) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const [img, setImg] = useState("");
-
-
 
   useEffect(() => {
     if (props.userDetail) {
@@ -45,7 +43,7 @@ const ModalAddUser = (props) => {
         });
       }
     } else {
-      setImg('');
+      setImg("");
       form.resetFields();
     }
   }, [props.userDetail, props.visible]);
@@ -165,7 +163,13 @@ const ModalAddUser = (props) => {
                 <Form.Item
                   label="Tên tài khoản"
                   name="username"
-                  rules={[{ required: true, message: "Nhập tên tài khoản!" }]}
+                  rules={[
+                    { required: true, message: "Nhập tên tài khoản!" },
+                    {
+                      min: 6,
+                      message: "Tài khoản tối thiểu 6 ký tự!",
+                    },
+                  ]}
                 >
                   <Input
                     className="input-item"

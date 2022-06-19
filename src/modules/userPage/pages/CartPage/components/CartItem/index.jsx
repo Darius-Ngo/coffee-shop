@@ -59,7 +59,7 @@ const CartItem = (props) => {
         </Col>
         <Col md={3}>
           <div className="product-price product-item__content">
-            {item.giaBan}đ
+            {(item.giaBan).toLocaleString('vi', {style : 'currency', currency : 'VND'})}
           </div>
         </Col>
         <Col md={4}>
@@ -82,8 +82,7 @@ const CartItem = (props) => {
         </Col>
         <Col md={3}>
           <strong className="sum-price product-item__content">
-            <span className="sum-number">{item.giaBan * num} </span>
-            {` đ`}
+            <span className="sum-number">{(item.giaBan * num)}</span>
           </strong>
         </Col>
         <Col md={2}>

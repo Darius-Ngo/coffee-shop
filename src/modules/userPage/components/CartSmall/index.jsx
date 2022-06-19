@@ -33,7 +33,7 @@ const CartSmall = () => {
                   />
                 </div>
                 <div className="cart-item__content">{item?.sanPham?.tenSanPham}</div>
-                <div className="cart-item__price">{item?.giaBan} VNĐ</div>
+                <div className="cart-item__price">{(item?.giaBan).toLocaleString('vi', {style : 'currency', currency : 'VND'})}</div>
                 <Tooltip placement="right" title="Xóa sản phẩm" color="#f5222d">
                   <div className="cart-item__delete" onClick={() => handleDelete(item?.id)}>
                     <MdDeleteOutline />
