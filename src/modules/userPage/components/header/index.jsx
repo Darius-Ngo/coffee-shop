@@ -122,7 +122,7 @@ const Header = () => {
                           <div className="name-account">{user?.hoTen}</div>                
                           <div className="wrap-avatar">
                               <Dropdown overlay={menu} placement="bottomRight" arrow={{ pointAtCenter: true }}>
-                                  <Avatar size={48} src={'https://co-coffeeshop.herokuapp.com'+user?.avatar} />
+                                  <Avatar size={48} src={'http://192.168.43.105:8080'+user?.avatar} />
                               </Dropdown>
                           </div>
                       </Space>

@@ -1,15 +1,12 @@
-import { Table, Button, Space, Tooltip, Spin, Avatar } from "antd";
+import { Table, Button, Space, Tooltip, Spin } from "antd";
 import {
-  EditOutlined,
-  DeleteOutlined,
   InfoCircleOutlined,
 } from "@ant-design/icons";
-import confirm from "antd/lib/modal/confirm";
 import moment from "moment";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./components/Header";
-import { getListStart, getListDetailStart } from "./redux";
+import { getListStart } from "./redux";
 import ModalOrderDetail from "./components/ModalOrderDetail";
 import "./styles.scss";
 
@@ -20,13 +17,12 @@ const OrderManager = () => {
   const {
     orderManager: {
       status,
-      data: { listOrder, listDetail },
+      data: { listOrder },
     },
   } = useSelector((state) => state);
 
   useEffect(() => {
     dispatch(getListStart());
-    // dispatch(getListDetailStart(14));
   }, []);
 
   const columns = [

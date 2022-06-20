@@ -1,9 +1,10 @@
 import { Button, Spin, Table } from "antd";
 import React, { useState, useEffect } from "react";
+import confirm from "antd/lib/modal/confirm";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import "./styles.scss";
-import { getListDetailStart } from "../../redux";
+import { getListDetailStart, chuyenTrangThaiStart } from "../../redux";
 import Modal from "../../../../../../components/Modal";
 
 const ModalOrderDetail = (props) => {
@@ -78,6 +79,36 @@ const ModalOrderDetail = (props) => {
     },
   ];
 
+  const handleChangeStatus = (status) => {
+    const body = {
+      id: orderDetail?.id,
+      trangThai: status,
+    }
+    dispatch(chuyenTrangThaiStart({ ...body }));
+    onCancel();
+  }
+
+  const confirmChangeStatus = () => {
+    confirm({
+      title: 'Hủy đơn hàng',
+      // icon: <DeleteOutlined color="red" />,
+      width: '600px',
+      content: (
+        <div>
+          Bạn có chắc chắn muốn hủy đơn hàng mã
+          <strong> {orderDetail?.maDonHang} </strong>
+          không?
+        </div>
+      ),
+      okText: 'Đồng ý',
+      cancelText: 'Đóng',
+      onOk() {
+        handleChangeStatus(0);
+      },
+      onCancel() { },
+    });
+  };
+
   return (
     <Modal
       visible={visible}
@@ -97,10 +128,10 @@ const ModalOrderDetail = (props) => {
           >
             Đóng
           </Button>
-          <Button key="submit1" className="btn-form-register__submit">
+          <Button key="submit1" className="btn-form-register__submit" onClick={() => handleChangeStatus(2)}>
             Nhận đơn
           </Button>
-          <Button key="submit2" className="btn-form-register__submit">
+          <Button key="submit2" className="btn-form-register__submit" onClick={confirmChangeStatus}>
             Hủy đơn
           </Button>
           <Button key="submit3" className="btn-form-register__submit">

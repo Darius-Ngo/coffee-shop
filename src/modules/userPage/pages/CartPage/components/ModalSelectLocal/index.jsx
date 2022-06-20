@@ -50,7 +50,7 @@ const ModalSelectLocal = (props) => {
   const handleSubmit = () => {
     form.validateFields().then(() => {
       const value = form.getFieldsValue(true);
-      const diaChi = `${xaPhuong}, ${quanHuyen}, ${tinhThanh}`.toString();
+      const diaChi = `${value.thongTinThem}, ${xaPhuong}, ${quanHuyen}, ${tinhThanh}`.toString();
       localStorage.setItem('diaChi', diaChi);
       localStorage.setItem('info', JSON.stringify(value));
       handleCancel();
@@ -104,7 +104,7 @@ const ModalSelectLocal = (props) => {
             <Row gutter={10}>
               <Col span={12}>
                 <Form.Item
-                  label="Họ tên"
+                  label="Họ tên người nhận"
                   name="tenNguoiNhan"
                   rules={[{ required: true, message: "Nhập họ tên!" }]}
                 >
@@ -117,7 +117,7 @@ const ModalSelectLocal = (props) => {
               </Col>
               <Col span={12}>
                 <Form.Item
-                  label="Số điện thoại"
+                  label="SĐT người nhận "
                   name="sdtNguoiNhan"
                   rules={[{ required: true, message: "Nhập sđt!" }]}
                 >

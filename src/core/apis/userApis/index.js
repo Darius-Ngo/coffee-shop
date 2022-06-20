@@ -1,7 +1,7 @@
 import axiosClient from "../../axiosClient";
 import {getListCategoryUrl, getListProductByCategoryIdUrl, getProductByIdUrl, 
   getCategoryByIdUrl, getAllTinhThanhPhoUrl, getQuanHuyenUrl, getXaPhuongUrl, datHangUrl,
-  getListCartUrl, insertCartUrl, deleteCartUrl} from './urls';
+  getListCartUrl, insertCartUrl, deleteCartUrl, chuyenTrangThaiUrl} from './urls';
 
 export const GetListCategoryApi = async () => {
     const res = await axiosClient.get(getListCategoryUrl);

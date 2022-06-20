@@ -13,3 +13,11 @@ export const GetListChiTietDonHangApi = async (id = "") => {
   if (!res || !res.data) throw new Error('Opps');
   return res.data;
 };
+
+
+export const ChuyenTrangThaiApi = async (data) => {
+  const chuyenTrangThaiUrl = (body) => `/api/admin/dondathang/chuyenTrangThai?idDonDatHang=${body.id}&trangThai=${body.trangThai}`;
+  const res = await axiosClient.patch(chuyenTrangThaiUrl(data));
+  if (!res || !res.data) throw new Error('Opps');
+  return res.data;
+};

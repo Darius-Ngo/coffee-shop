@@ -1,10 +1,11 @@
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 import { toast } from 'react-toastify';
-import { GetListDonHangApi, GetListChiTietDonHangApi } from '../../../../core/apis/orderManager';
+import { GetListDonHangApi, GetListChiTietDonHangApi, ChuyenTrangThaiApi } from '../../../../core/apis/orderManager';
 
 import {
     getListStart, getListSuccess, getListFailed,
     getListDetailFailed, getListDetailSuccess, getListDetailStart,
+    chuyenTrangThaiFailed, chuyenTrangThaiSuccess, chuyenTrangThaiStart,
 } from './redux';
 
 const options = {
@@ -39,11 +40,28 @@ function* getListDetailSaga(action) {
         if (res.ok) {
             yield put({type: getListDetailSuccess,payload: res.data});
         } else {
-            yield put({ type: getListDetailStart, payload: res.message });
+            yield put({ type: getListDetailFailed, payload: res.message });
             toast.error(res.message, options);
         }
     } catch (error) {
-        yield put({ type: getListDetailStart, payload: error });
+        yield put({ type: getListDetailFailed, payload: error });
+        toast.error('có lỗi xảy ra vui lòng liên hệ quản trị viên!', options);
+    }
+}
+
+function* chuyenTrangThaiSaga(action) {
+    try {
+        const res = yield call(ChuyenTrangThaiApi, action.payload);
+        if (res.ok) {
+            yield put({type: chuyenTrangThaiSuccess,payload: res.data});
+            toast.success('Chuyển trạng thái đơn hàng thành công.', options);
+            yield put({type: getListStart.type});
+        } else {
+            yield put({ type: chuyenTrangThaiFailed, payload: res.message });
+            toast.error(res.message, options);
+        }
+    } catch (error) {
+        yield put({ type: chuyenTrangThaiFailed, payload: error });
         toast.error('có lỗi xảy ra vui lòng liên hệ quản trị viên!', options);
     }
 }
@@ -54,7 +72,10 @@ function* watchGetList() {
 function* watchGetListDetail() {
     yield takeLatest(getListDetailStart.type, getListDetailSaga);
 }
+function* watchChuyenTrangThai() {
+    yield takeLatest(chuyenTrangThaiStart.type, chuyenTrangThaiSaga);
+}
 
 export default function* OrderManagerSaga() {
-    yield all([watchGetList(), watchGetListDetail()]);
+    yield all([watchGetList(), watchGetListDetail(), watchChuyenTrangThai()]);
 }

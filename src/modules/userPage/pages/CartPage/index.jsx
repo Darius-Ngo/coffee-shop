@@ -33,6 +33,8 @@ const CartPage = () => {
     setSumBill(sum);
   }, [changePrice, listCart]);
 
+  console.log('listCart', listCart)
+
   const handleSubmit = () => {
     if(!info) {
       setShowModalSelectLocal(true);
@@ -42,7 +44,7 @@ const CartPage = () => {
         const listProduct = [];
         listCart.map((item, i) => {
           listProduct.push({
-            idSanPham: item.id,
+            idSanPham: item.sanPham.id,
             kichCo: item.kichCo,
             soLuong: value['soLuong'+i],
           })

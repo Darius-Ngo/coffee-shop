@@ -34,11 +34,22 @@ const orderManagerSlice = createSlice({
       getListDetailFailed: (state, action) => {
         state.status = ReduxType.ERROR;
       },
+
+      chuyenTrangThaiStart: (state, action) => {
+        state.status = ReduxType.LOADING;
+      },
+      chuyenTrangThaiSuccess: (state, action) => {
+        state.status = ReduxType.SUCCESS;
+      },
+      chuyenTrangThaiFailed: (state, action) => {
+        state.status = ReduxType.ERROR;
+      },
     }
 });
 
 export const { 
     getListFailed, getListSuccess, getListStart,
     getListDetailFailed, getListDetailSuccess, getListDetailStart,
+    chuyenTrangThaiFailed, chuyenTrangThaiSuccess, chuyenTrangThaiStart,
   } = orderManagerSlice.actions;
 export default orderManagerSlice.reducer;

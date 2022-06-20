@@ -65,7 +65,7 @@ const CategoryManager = () => {
         <div className="text-center">
           <Image
             width={200}
-            src={'https://co-coffeeshop.herokuapp.com'+record}
+            src={'http://192.168.43.105:8080'+record}
           />
         </div>
       )
