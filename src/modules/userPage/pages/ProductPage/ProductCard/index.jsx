@@ -10,7 +10,7 @@ const ProductCard = (props) => {
     <div className="product-item">
       <div className="wrap-img">
         <Link to={`/product/${product.id}`}>
-          <img src={`http://192.168.43.105:8080${product.anh}`} alt={product.tenSanPham} />
+          <img src={`https://co-coffeeshop.herokuapp.com${product.anh}`} alt={product.tenSanPham} />
         </Link>
       </div>
       <Link to={`/product/${product.id}`}>

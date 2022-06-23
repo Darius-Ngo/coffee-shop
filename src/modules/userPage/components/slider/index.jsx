@@ -45,7 +45,7 @@ const SliderItem = (props) => {
     return (
       <div
           className={`slide-item ${props.active ? 'active' : ''}`}
-          style={{ backgroundImage: `url(http://192.168.43.105:8080${props.item.anh})` }}
+          style={{ backgroundImage: `url(https://co-coffeeshop.herokuapp.com${props.item.anh})` }}
       >
           <Link to={`/menu/${props.item.id}`}>
             <button className="btn-explore">XEM SẢN PHẨM</button>

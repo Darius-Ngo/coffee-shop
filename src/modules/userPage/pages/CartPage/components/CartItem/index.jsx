@@ -31,7 +31,7 @@ const CartItem = (props) => {
       okText: 'Đồng ý',
       cancelText: 'Hủy',
       onOk() {
-        dispatch(deleteCartStart(productData.sanPham.id));
+        dispatch(deleteCartStart(productData.id));
       },
       onCancel() {},
     });
@@ -44,7 +44,7 @@ const CartItem = (props) => {
             <div className="product-img-name">
               <div className="product-img">
                 <img
-                  src={"http://192.168.43.105:8080" + item.sanPham.anh}
+                  src={"https://co-coffeeshop.herokuapp.com" + item.sanPham.anh}
                   alt={item.sanPham.tenSanPham}
                 />
               </div>

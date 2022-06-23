@@ -28,7 +28,7 @@ const CartSmall = () => {
               <div className="cart-item" key={index}>
                 <div className="cart-item__img">
                   <img
-                    src={"http://192.168.43.105:8080" + item?.sanPham.anh}
+                    src={"https://co-coffeeshop.herokuapp.com" + item?.sanPham.anh}
                     alt={item.sanPham.tenSanPham}
                   />
                 </div>
@@ -41,7 +41,7 @@ const CartSmall = () => {
                 </Tooltip>
               </div>
             ))}
-          {!listCart && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+          {!listCart.length && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={'Giỏ trống!'}/>}
         </div>
         <div className="btn-order">
           <Link to={"/cart"}>

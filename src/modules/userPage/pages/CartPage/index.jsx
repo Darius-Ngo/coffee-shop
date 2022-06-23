@@ -1,4 +1,4 @@
-import { Row, Col, Spin, Form } from "antd";
+import { Row, Col, Spin, Form, Empty, message } from "antd";
 import { ImLocation2 } from "react-icons/im";
 import React, { useState, useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux';
@@ -33,8 +33,6 @@ const CartPage = () => {
     setSumBill(sum);
   }, [changePrice, listCart]);
 
-  console.log('listCart', listCart)
-
   const handleSubmit = () => {
     if(!info) {
       setShowModalSelectLocal(true);
@@ -58,7 +56,11 @@ const CartPage = () => {
           thongTinThem: '',
           chiTietDatHangInputList: listProduct,
         }
-        dispatch(datHangStart({ ...body }));
+        if(listCart.length > 0) {
+          dispatch(datHangStart({ ...body }));
+        } else {
+          message.error('Không có sản phẩm để đặt hàng.');
+        }
       });
     }
   };
@@ -113,7 +115,7 @@ const CartPage = () => {
           </div>
           <div className="cart-content">
           <Form form={form}>
-            {listCart &&
+            {listCart.length > 0 &&
               listCart.map((item, i) => (
                 <CartItem
                   item={item}
@@ -122,6 +124,7 @@ const CartPage = () => {
                   Change={(value) => setChangePrice(value)}
                 />
               ))}
+          {!listCart.length > 0 && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={'Không có sản phẩm nào!'}/>}
           </Form>
           </div>
           <div className="cart-order">

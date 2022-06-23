@@ -25,7 +25,9 @@ const ModalOrderDetail = (props) => {
     {
       title: "STT",
       render: (record) => (
-        <div className="text-center">{(listDetail?.indexOf(record) + 1) || ''}</div>
+        <div className="text-center">
+          {listDetail?.indexOf(record) + 1 || ""}
+        </div>
       ),
       key: "id",
       width: "5%",
@@ -70,29 +72,32 @@ const ModalOrderDetail = (props) => {
       width: 240,
       render: (record) => (
         <div>
-          {(record?.giaBan * record?.soLuong) ?(record?.giaBan * record?.soLuong).toLocaleString("vi", {
-            style: "currency",
-            currency: "VND",
-          }) : ''}
+          {record?.giaBan * record?.soLuong
+            ? (record?.giaBan * record?.soLuong).toLocaleString("vi", {
+                style: "currency",
+                currency: "VND",
+              })
+            : ""}
         </div>
       ),
     },
   ];
+  console.log("orderDetail", orderDetail);
 
   const handleChangeStatus = (status) => {
     const body = {
       id: orderDetail?.id,
       trangThai: status,
-    }
+    };
     dispatch(chuyenTrangThaiStart({ ...body }));
     onCancel();
-  }
+  };
 
   const confirmChangeStatus = () => {
     confirm({
-      title: 'Hủy đơn hàng',
+      title: "Hủy đơn hàng",
       // icon: <DeleteOutlined color="red" />,
-      width: '600px',
+      width: "600px",
       content: (
         <div>
           Bạn có chắc chắn muốn hủy đơn hàng mã
@@ -100,12 +105,12 @@ const ModalOrderDetail = (props) => {
           không?
         </div>
       ),
-      okText: 'Đồng ý',
-      cancelText: 'Đóng',
+      okText: "Đồng ý",
+      cancelText: "Đóng",
       onOk() {
         handleChangeStatus(0);
       },
-      onCancel() { },
+      onCancel() {},
     });
   };
 
@@ -128,10 +133,21 @@ const ModalOrderDetail = (props) => {
           >
             Đóng
           </Button>
-          <Button key="submit1" className="btn-form-register__submit" onClick={() => handleChangeStatus(2)}>
+          <Button
+            key="submit1"
+            className="btn-form-register__submit"
+            onClick={() => handleChangeStatus(2
+              )}
+            disabled={orderDetail?.trangThai === 2}
+          >
             Nhận đơn
           </Button>
-          <Button key="submit2" className="btn-form-register__submit" onClick={confirmChangeStatus}>
+          <Button
+            key="submit2"
+            className="btn-form-register__submit"
+            onClick={confirmChangeStatus}
+            disabled={orderDetail?.trangThai === 0}
+          >
             Hủy đơn
           </Button>
           <Button key="submit3" className="btn-form-register__submit">
@@ -196,9 +212,17 @@ const ModalOrderDetail = (props) => {
               (() => {
                 let tongGia = 0;
                 for (let row of listDetail) {
-                  tongGia += (row['soLuong'] * row['giaBan']);
+                  tongGia += row["soLuong"] * row["giaBan"];
                 }
-                return { key: 'total', name: 'Total (by Column)', giaBan: 'Tổng thanh toán: ', soLuong: tongGia.toLocaleString("vi", { style: "currency", currency: "VND" }) };
+                return {
+                  key: "total",
+                  name: "Total (by Column)",
+                  giaBan: "Tổng thanh toán: ",
+                  soLuong: tongGia.toLocaleString("vi", {
+                    style: "currency",
+                    currency: "VND",
+                  }),
+                };
               })()
             )}
           />

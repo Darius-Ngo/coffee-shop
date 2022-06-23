@@ -59,7 +59,7 @@ const ProductManager = () => {
         <div className="text-center">
           <Image
             width={100}
-            src={'http://192.168.43.105:8080'+record}
+            src={'https://co-coffeeshop.herokuapp.com'+record}
           />
         </div>
       )

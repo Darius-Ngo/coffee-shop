@@ -35,7 +35,7 @@ const CategoryItem = (props) => {
       <Row>
         <Col span={15} className="mb-3">
           <Link to={`/menu/${category.id}`}>
-          <img src={`http://192.168.43.105:8080${category.anh}`} alt="" />
+          <img src={`https://co-coffeeshop.herokuapp.com${category.anh}`} alt="" />
           </Link>
           <div className="category-description">{category.moTa}</div>
           <Link to={`/menu/${category.id}`}>
@@ -47,7 +47,7 @@ const CategoryItem = (props) => {
             category?.sanPham?.map((product, i) => (
               <div className="box-product" key={i}>
                 <Link to={`/product/${product.id}`} className="wrap-img">
-                  <img src={`http://192.168.43.105:8080${product.anh}`} alt={product.tenSanPham} />
+                  <img src={`https://co-coffeeshop.herokuapp.com${product.anh}`} alt={product.tenSanPham} />
                 </Link>
                 <div className="product-info">
                 <Link to={`/product/${product.id}`} className="wrap-img">

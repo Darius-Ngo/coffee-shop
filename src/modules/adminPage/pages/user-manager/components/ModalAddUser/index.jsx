@@ -101,7 +101,7 @@ const ModalAddUser = (props) => {
   ];
 
   const uploadImage = async (options) => {
-    const UPLOAD_URL = "http://192.168.43.105:8080/api/uploads";
+    const UPLOAD_URL = "https://co-coffeeshop.herokuapp.com/api/uploads";
     const { onSuccess, onError, file } = options;
     const fmData = new FormData();
     const config = {
@@ -168,6 +168,10 @@ const ModalAddUser = (props) => {
                     {
                       min: 6,
                       message: "Tài khoản tối thiểu 6 ký tự!",
+                    },
+                    {
+                      max: 18,
+                      message: "Tài khoản tối đa 18 ký tự!",
                     },
                   ]}
                 >
@@ -258,7 +262,7 @@ const ModalAddUser = (props) => {
                   rules={[
                     {
                       pattern: getRegexMobile(),
-                      message: "Nhập số điện thoại!",
+                      message: "Số điện thoại không đúng!",
                     },
                   ]}
                 >

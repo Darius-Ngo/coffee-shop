@@ -1,7 +1,18 @@
-import { Modal, Button, Form, Col, Row, Select, Input, Spin, message } from "antd";
+import {
+  Modal,
+  Button,
+  Form,
+  Col,
+  Row,
+  Select,
+  Input,
+  Spin,
+  message,
+} from "antd";
 import { SaveOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {getRegexMobile} from '../../../../../common/regexCommon';
 import {
   getXaPhuongStart,
   getQuanHuyenStart,
@@ -50,18 +61,19 @@ const ModalSelectLocal = (props) => {
   const handleSubmit = () => {
     form.validateFields().then(() => {
       const value = form.getFieldsValue(true);
-      const diaChi = `${value.thongTinThem}, ${xaPhuong}, ${quanHuyen}, ${tinhThanh}`.toString();
-      localStorage.setItem('diaChi', diaChi);
-      localStorage.setItem('info', JSON.stringify(value));
+      const diaChi =
+        `${value.thongTinThem}, ${xaPhuong}, ${quanHuyen}, ${tinhThanh}`.toString();
+      localStorage.setItem("diaChi", diaChi);
+      localStorage.setItem("info", JSON.stringify(value));
       handleCancel();
-      message.success('Đã lưu thông tin đặt hàng.')
+      message.success("Đã lưu thông tin đặt hàng.");
     });
   };
 
   const handleCancel = () => {
     onCancel();
     form.resetFields();
-  }
+  };
 
   return (
     <Modal
@@ -119,7 +131,13 @@ const ModalSelectLocal = (props) => {
                 <Form.Item
                   label="SĐT người nhận "
                   name="sdtNguoiNhan"
-                  rules={[{ required: true, message: "Nhập sđt!" }]}
+                  rules={[
+                    { required: true, message: "Nhập sđt!" },
+                    {
+                      pattern: getRegexMobile(),
+                      message: "Số điện thoại không đúng!",
+                    },
+                  ]}
                 >
                   <Input className="input-item" placeholder="số điện thoại" />
                 </Form.Item>
