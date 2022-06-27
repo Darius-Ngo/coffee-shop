@@ -1,7 +1,7 @@
 import axiosClient from "../../axiosClient";
 import {getListCategoryUrl, getListProductByCategoryIdUrl, getProductByIdUrl, 
   getCategoryByIdUrl, getAllTinhThanhPhoUrl, getQuanHuyenUrl, getXaPhuongUrl, datHangUrl,
-  getListCartUrl, insertCartUrl, deleteCartUrl, chuyenTrangThaiUrl} from './urls';
+  getListCartUrl, insertCartUrl, deleteCartUrl, getListDonHangUrl, huyDonHangUrl} from './urls';
 
 export const GetListCategoryApi = async () => {
     const res = await axiosClient.get(getListCategoryUrl);
@@ -42,6 +42,18 @@ export const GetXaPhuongApi = async (id) => {
 
 export const DatHangApi = async (data) => {
   const res = await axiosClient.post(datHangUrl, data);
+  if (!res || !res.data) throw new Error('Opps');
+  return res.data;
+};
+
+export const GetListDonHangApi = async (id) => {
+  const res = await axiosClient.get(getListDonHangUrl+id);
+  if (!res || !res.data) throw new Error('Opps');
+  return res.data;
+};
+
+export const HuyDonHangApi = async (id) => {
+  const res = await axiosClient.get(huyDonHangUrl+id);
   if (!res || !res.data) throw new Error('Opps');
   return res.data;
 };

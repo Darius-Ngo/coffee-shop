@@ -12,3 +12,5 @@ export const insertCartUrl = '/api/web/giohang/insert';
 export const deleteCartUrl = '/api/web/giohang/delete?id=';
 
 export const datHangUrl = '/api/web/datHang';
+export const getListDonHangUrl = '/api/web/donhang/getList?idNguoiDung=';
+export const huyDonHangUrl = '/api/web/donhang/cancel?idDonHang=';

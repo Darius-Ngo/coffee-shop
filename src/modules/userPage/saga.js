@@ -12,6 +12,8 @@ import {
   GetListCartApi,
   insertCartApi,
   deleteCartApi,
+  GetListDonHangApi,
+  HuyDonHangApi,
 } from "../../core/apis/userApis";
 
 import {
@@ -48,6 +50,8 @@ import {
   datHangStart,
   datHangSuccess,
   datHangFailed,
+  getListDonHangFailed, getListDonHangSuccess, getListDonHangStart,
+  huyDonHangFailed, huyDonHangSuccess, huyDonHangStart,
 } from "./redux";
 
 const options = {
@@ -231,6 +235,37 @@ function* datHangSaga(action) {
   }
 }
 
+function* getListDonHangSaga(action) {
+  try {
+    const res = yield call(GetListDonHangApi, action.payload);
+    if (res.ok) {
+      yield put({ type: getListDonHangSuccess, payload: res.data });
+    } else {
+      yield put({ type: getListDonHangFailed, payload: res.message });
+      toast.error(res.message, options);
+    }
+  } catch (error) {
+    yield put({ type: getListDonHangFailed, payload: error });
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+  }
+}
+
+function* huyDonHangSaga(action) {
+  try {
+    const res = yield call(HuyDonHangApi, action.payload);
+    if (res.ok) {
+      yield put({ type: huyDonHangSuccess, payload: res.data });
+      toast.success('Huỷ đơn hàng thành công.')
+    } else {
+      yield put({ type: huyDonHangFailed, payload: res.message });
+      toast.error(res.message, options);
+    }
+  } catch (error) {
+    yield put({ type: huyDonHangFailed, payload: error });
+    // toast.error("có lỗi xảy ra vui lòng liên hệ quản trị viên!", options);
+  }
+}
+
 function* watchGetListCategory() {
   yield takeLatest(getListCategoryStart.type, getListCategorySaga);
 }
@@ -257,6 +292,12 @@ function* watchDeleteCart() {
 function* watchDatHang() {
   yield takeLatest(datHangStart.type, datHangSaga);
 }
+function* watchGetListDonHang() {
+  yield takeLatest(getListDonHangStart.type, getListDonHangSaga);
+}
+function* watchHuyDonHang() {
+  yield takeLatest(huyDonHangStart.type, huyDonHangSaga);
+}
 
 function* watchGetTinhThanh() {
   yield takeLatest(getTinhThanhStart.type, getTinhThanhSaga);
@@ -281,5 +322,7 @@ export default function* UserPageSaga() {
     watchInsertCart(),
     watchDeleteCart(),
     watchDatHang(),
+    watchGetListDonHang(),
+    watchHuyDonHang(),
   ]);
 }

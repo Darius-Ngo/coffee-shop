@@ -135,4 +135,36 @@
       }
     }
   }
+
+  .shipper-info {
+    @include flex(center, flex-start);
+    padding: 1rem 2rem;
+    background-color: #fff;
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 16px;
+
+    .shipper-icon {
+      color: #00bfa5;
+      margin-right: 8px;
+      svg {
+        font-size: 24px;
+      }
+    }
+    .shipper-content {
+      flex: 1;
+      strong {
+        margin-left: 6px;
+      }
+    }
+    .btn-detail {
+      font-weight: 600;
+      color: #05a;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }

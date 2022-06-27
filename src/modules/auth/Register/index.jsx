@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerStart } from "../redux";
 import Modal from "../../../components/Modal";
 import { toast } from "react-toastify";
+import {getRegexPassword} from "../../common/regexCommon";
 import "./styles.scss";
 
 const options = {
@@ -87,7 +88,7 @@ const RegisterForm = (props) => {
             name="hoTen"
             rules={[{ required: true, message: "Nhập họ tên!" }]}
           >
-            <Input id="hoTen" className="input-item" allowClear />
+            <Input id="hoTen" placeholder="Nhập họ tên" className="input-item" allowClear />
           </Form.Item>
           <Form.Item
             label="Email"
@@ -100,7 +101,7 @@ const RegisterForm = (props) => {
               },
             ]}
           >
-            <Input id="email" className="input-item" allowClear />
+            <Input id="email" placeholder="Nhập email" className="input-item" allowClear />
           </Form.Item>
           <Form.Item
             label="Tên tài khoản"
@@ -118,7 +119,7 @@ const RegisterForm = (props) => {
               },
             ]}
           >
-            <Input id="username" className="input-item" allowClear />
+            <Input id="username" placeholder="Nhập tên tài khoản" className="input-item" allowClear />
           </Form.Item>
           <Form.Item
             label="Mật khẩu"
@@ -127,12 +128,13 @@ const RegisterForm = (props) => {
             rules={[
               { required: true, message: "Nhập mật khẩu!" },
               {
-                min: 6,
-                message: "Mật khẩu tối thiểu 6 ký tự!",
+                pattern: getRegexPassword(),
+                message:
+                  "Mật khẩu có chứa ít nhất 8 ký tự, trong đó có ít nhất một số và bao gồm cả chữ thường và chữ hoa và ký tự đặc biệt, ví dụ @, #, ?, !.",
               },
             ]}
           >
-            <Input.Password id="password" className="input-item" />
+            <Input.Password id="password" placeholder="Nhập mật khẩu" className="input-item" />
           </Form.Item>
           <Form.Item
             label="Xác nhận mật khẩu"
@@ -149,6 +151,7 @@ const RegisterForm = (props) => {
               id="confirmPassword"
               ref={confirmPassword}
               className="input-item"
+              placeholder="Xác nhận mật khẩu"
             />
           </Form.Item>
         </Form>

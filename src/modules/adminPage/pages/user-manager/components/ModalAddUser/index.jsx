@@ -16,7 +16,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { insertStart, updateStart } from "../../redux";
-import { getRegexMobile } from "../../../../../common/regexCommon";
+import { getRegexMobile, getRegexPassword } from "../../../../../common/regexCommon";
 import Modal from "../../../../../../components/Modal";
 
 const ModalAddUser = (props) => {
@@ -190,8 +190,9 @@ const ModalAddUser = (props) => {
                   rules={[
                     { required: !props.userDetail, message: "Nhập mật khẩu!" },
                     {
-                      min: 6,
-                      message: "Mật khẩu tối thiểu 6 ký tự!!",
+                      pattern: getRegexPassword(),
+                      message:
+                        "Mật khẩu có chứa ít nhất 8 ký tự, trong đó có ít nhất một số và bao gồm cả chữ thường và chữ hoa và ký tự đặc biệt, ví dụ @, #, ?, !.",
                     },
                   ]}
                 >
@@ -225,7 +226,7 @@ const ModalAddUser = (props) => {
                     { required: true, message: "Nhập email!" },
                     {
                       type: "email",
-                      message: "Vui lòng nhập email!",
+                      message: "Email không đúng!",
                     },
                   ]}
                 >

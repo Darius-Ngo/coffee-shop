@@ -132,7 +132,7 @@ const ModalSelectLocal = (props) => {
                   label="SĐT người nhận "
                   name="sdtNguoiNhan"
                   rules={[
-                    { required: true, message: "Nhập sđt!" },
+                    { required: true, message: "Nhập số điện thoại!" },
                     {
                       pattern: getRegexMobile(),
                       message: "Số điện thoại không đúng!",

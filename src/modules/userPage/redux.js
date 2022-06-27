@@ -8,6 +8,7 @@ const initialState = {
         categoryDetail: {},
         productDetail: {},
         listCart: [],
+        listDonHang: [],
         listTinhThanh: [],
         listQuanHuyen: [],
         listXaPhuong: [],
@@ -134,6 +135,26 @@ const userPageSlice = createSlice({
       datHangFailed: (state, action) => {
         state.status = ReduxType.ERROR;
       },
+
+      getListDonHangStart: (state, action) => {
+        state.status = ReduxType.LOADING;
+      },
+      getListDonHangSuccess: (state, action) => {
+        state.status = ReduxType.SUCCESS;
+        state.data.listDonHang = action.payload;
+      },
+      getListDonHangFailed: (state, action) => {
+        state.status = ReduxType.ERROR;
+      },
+      huyDonHangStart: (state, action) => {
+        state.status = ReduxType.LOADING;
+      },
+      huyDonHangSuccess: (state, action) => {
+        state.status = ReduxType.SUCCESS;
+      },
+      huyDonHangFailed: (state, action) => {
+        state.status = ReduxType.ERROR;
+      },
     }
 });
 
@@ -149,5 +170,7 @@ export const {
     insertCartStart, insertCartSuccess, insertCartFailed,
     deleteCartStart, deleteCartSuccess, deleteCartFailed,
     datHangStart, datHangSuccess, datHangFailed,
+    getListDonHangFailed, getListDonHangSuccess, getListDonHangStart,
+    huyDonHangFailed, huyDonHangSuccess, huyDonHangStart,
   } = userPageSlice.actions;
 export default userPageSlice.reducer;
