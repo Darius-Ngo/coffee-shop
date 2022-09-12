@@ -171,7 +171,7 @@ const Header = () => {
               >
                 <Avatar
                   size={48}
-                  src={"https://co-coffeeshop.herokuapp.com" + user?.avatar}
+                  src={"http://192.168.43.105:8080" + user?.avatar}
                 />
               </Dropdown>
             </div>

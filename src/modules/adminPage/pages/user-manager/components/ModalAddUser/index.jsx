@@ -16,7 +16,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { insertStart, updateStart } from "../../redux";
-import { getRegexMobile, getRegexPassword } from "../../../../../common/regexCommon";
+import {
+  getRegexMobile,
+  getRegexPassword,
+} from "../../../../../common/regexCommon";
 import Modal from "../../../../../../components/Modal";
 
 const ModalAddUser = (props) => {
@@ -101,7 +104,7 @@ const ModalAddUser = (props) => {
   ];
 
   const uploadImage = async (options) => {
-    const UPLOAD_URL = "https://co-coffeeshop.herokuapp.com/api/uploads";
+    const UPLOAD_URL = "http://192.168.43.105:8080/api/uploads";
     const { onSuccess, onError, file } = options;
     const fmData = new FormData();
     const config = {
@@ -128,7 +131,9 @@ const ModalAddUser = (props) => {
       onCancel={props.onCancel}
       width={600}
       title={
-        props.user ? "Sửa thông tin người dùng" : "Thêm thông tin người dùng"
+        props.userDetail
+          ? `Sửa thông tin tài khoản ${props.userDetail.username}`
+          : "Thêm thông tin người dùng"
       }
       footer={
         <div key="footer" className="d-flex justify-content-end">
@@ -158,51 +163,56 @@ const ModalAddUser = (props) => {
             className="form-content"
             initialValues={{}}
           >
-            <Row gutter={10}>
-              <Col span={12}>
-                <Form.Item
-                  label="Tên tài khoản"
-                  name="username"
-                  rules={[
-                    { required: true, message: "Nhập tên tài khoản!" },
-                    {
-                      min: 6,
-                      message: "Tài khoản tối thiểu 6 ký tự!",
-                    },
-                    {
-                      max: 18,
-                      message: "Tài khoản tối đa 18 ký tự!",
-                    },
-                  ]}
-                >
-                  <Input
-                    className="input-item"
-                    allowClear
-                    placeholder="tên tài khoản"
-                    disabled={props.userDetail}
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  label="Mật khẩu"
-                  name="password"
-                  rules={[
-                    { required: !props.userDetail, message: "Nhập mật khẩu!" },
-                    {
-                      pattern: getRegexPassword(),
-                      message:
-                        "Mật khẩu có chứa ít nhất 8 ký tự, trong đó có ít nhất một số và bao gồm cả chữ thường và chữ hoa và ký tự đặc biệt, ví dụ @, #, ?, !.",
-                    },
-                  ]}
-                >
-                  <Input.Password
-                    className="input-item"
-                    placeholder="mật khẩu"
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
+            {!props.userDetail && (
+              <Row gutter={10}>
+                <Col span={12}>
+                  <Form.Item
+                    label="Tên tài khoản"
+                    name="username"
+                    rules={[
+                      { required: true, message: "Nhập tên tài khoản!" },
+                      {
+                        min: 6,
+                        message: "Tài khoản tối thiểu 6 ký tự!",
+                      },
+                      {
+                        max: 18,
+                        message: "Tài khoản tối đa 18 ký tự!",
+                      },
+                    ]}
+                  >
+                    <Input
+                      className="input-item"
+                      allowClear
+                      placeholder="tên tài khoản"
+                      disabled={props.userDetail}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    label="Mật khẩu"
+                    name="password"
+                    rules={[
+                      {
+                        required: !props.userDetail,
+                        message: "Nhập mật khẩu!",
+                      },
+                      {
+                        pattern: getRegexPassword(),
+                        message:
+                          "Mật khẩu có chứa ít nhất 8 ký tự, trong đó có ít nhất một số và bao gồm cả chữ thường và chữ hoa và ký tự đặc biệt, ví dụ @, #, ?, !.",
+                      },
+                    ]}
+                  >
+                    <Input.Password
+                      className="input-item"
+                      placeholder="mật khẩu"
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
+            )}
             <Row gutter={10}>
               <Col span={12}>
                 <Form.Item

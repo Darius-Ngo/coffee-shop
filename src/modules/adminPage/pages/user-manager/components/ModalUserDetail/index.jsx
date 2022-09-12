@@ -23,7 +23,7 @@ const ModalUserDetail = (props) => {
         >
           <div className="container_modal-detail">
             <div className="text-center">
-              <Avatar size={64} src={'https://co-coffeeshop.herokuapp.com'+info?.avatar} />
+              <Avatar size={64} src={'http://192.168.43.105:8080'+info?.avatar} />
             </div>
             <Row className="wrap-info">
               <Col span={12}>

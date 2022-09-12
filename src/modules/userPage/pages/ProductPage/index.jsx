@@ -77,7 +77,7 @@ const CategoryCard = (props) => {
     <div className="category-item">
       <div className="wrap-img">
         <Link to={`/menu/${category.id}`}>
-          <img src={`https://co-coffeeshop.herokuapp.com${category.anh}`} alt={category.tenSanPham} />
+          <img src={`http://192.168.43.105:8080${category.anh}`} alt={category.tenSanPham} />
         </Link>
       </div>
       <Link to={`/product/${category.id}`}>

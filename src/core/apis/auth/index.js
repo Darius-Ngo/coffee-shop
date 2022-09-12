@@ -14,9 +14,9 @@ export const registerApi = async (data) => {
     return res.data;
 };
 
-// export const logoutApi = async () => {
-//     const logoutUrl = '/auth/signup'
-//     const res = await await axiosClient.post(logoutUrl);
-//     if (!res || !res.data) throw new Error('Opps');
-//     return res.data;
-// };
+export const changePasswordApi = async (data) => {
+    const changePassUrl = 'api/auth/changePassword'
+    const res = await axiosClient.post(changePassUrl, data);
+    if (!res || !res.data) throw new Error('Opps');
+    return res.data;
+};

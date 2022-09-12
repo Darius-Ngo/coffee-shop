@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const axiosClient = () => {
     const defaultOptions = {
-      baseURL: 'https://co-coffeeshop.herokuapp.com', //https://co-coffeeshop.herokuapp.com
+      baseURL: 'http://192.168.43.105:8080', //http://192.168.43.105:8080
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': 'http://localhost:3000',

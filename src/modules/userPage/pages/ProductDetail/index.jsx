@@ -74,7 +74,7 @@ const ProductPage = () => {
           <div className="product-detail-title mb-1 ">{productDetail?.tenSanPham}</div>
           <div className="row-content">
             <div className="wrap-img">
-            <img src={`https://co-coffeeshop.herokuapp.com${productDetail.anh}`} alt={productDetail.tenSanPham} />
+            <img src={`http://192.168.43.105:8080${productDetail.anh}`} alt={productDetail.tenSanPham} />
             </div>
             <div className="wrap-content">
               <div className="product-description">{productDetail?.moTa}</div>
@@ -124,7 +124,7 @@ const ProductCard = (props) => {
     <div className="product-item">
       <div className="wrap-img">
         <Link to={`/product/${product.id}`}>
-          <img src={`https://co-coffeeshop.herokuapp.com${product.anh}`} alt={product.tenSanPham} />
+          <img src={`http://192.168.43.105:8080${product.anh}`} alt={product.tenSanPham} />
         </Link>
       </div>
       <Link to={`/product/${product.id}`}>

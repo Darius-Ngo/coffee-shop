@@ -56,7 +56,7 @@ const UserManager = () => {
       title: 'Ảnh đại diện',
       dataIndex: 'avatar',
       render: ( record) => <div className="text-center">
-          <Avatar size={64} src={'https://co-coffeeshop.herokuapp.com'+record} />
+          <Avatar size={64} src={'http://192.168.43.105:8080'+record} />
       </div>,
       key: 'avatar'
     },

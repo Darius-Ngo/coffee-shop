@@ -28,7 +28,7 @@ const CartSmall = () => {
               <div className="cart-item" key={index}>
                 <div className="cart-item__img">
                   <img
-                    src={"https://co-coffeeshop.herokuapp.com" + item?.sanPham.anh}
+                    src={"http://192.168.43.105:8080" + item?.sanPham.anh}
                     alt={item.sanPham.tenSanPham}
                   />
                 </div>

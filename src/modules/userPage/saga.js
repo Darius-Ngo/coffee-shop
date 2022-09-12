@@ -251,11 +251,13 @@ function* getListDonHangSaga(action) {
 }
 
 function* huyDonHangSaga(action) {
+  const User = JSON.parse(localStorage.getItem('User'));
   try {
     const res = yield call(HuyDonHangApi, action.payload);
     if (res.ok) {
-      yield put({ type: huyDonHangSuccess, payload: res.data });
+      yield put({ type: getListDonHangStart, payload: User.id});
       toast.success('Huỷ đơn hàng thành công.')
+      yield put({ type: huyDonHangSuccess, payload: res.data });
     } else {
       yield put({ type: huyDonHangFailed, payload: res.message });
       toast.error(res.message, options);

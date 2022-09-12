@@ -21,6 +21,8 @@ const ModalOrderDetail = (props) => {
     if (orderDetail) dispatch(getListDetailStart(orderDetail?.id));
   }, [orderDetail]);
 
+  console.log("orderDetail", orderDetail);
+
   const columns = [
     {
       title: "STT",
@@ -133,26 +135,24 @@ const ModalOrderDetail = (props) => {
           >
             Đóng
           </Button>
-          <Button
-            key="submit1"
-            className="btn-form-register__submit"
-            onClick={() => handleChangeStatus(2
-              )}
-            disabled={orderDetail?.trangThai === 2}
-          >
-            Nhận đơn
-          </Button>
-          <Button
+          {orderDetail?.buttonShowList?.map((item, i) => (
+            <Button
+              key="submit1"
+              className="btn-form-register__submit"
+              onClick={() => handleChangeStatus(item.trangThai)}
+              // disabled={orderDetail?.trangThai === 2}
+            >
+              {item.text}
+            </Button>
+          ))}
+          {/* <Button
             key="submit2"
             className="btn-form-register__submit"
             onClick={confirmChangeStatus}
             disabled={orderDetail?.trangThai === 0}
           >
             Hủy đơn
-          </Button>
-          <Button key="submit3" className="btn-form-register__submit">
-            In phiếu
-          </Button>
+          </Button> */}
         </div>
       }
     >

@@ -91,11 +91,11 @@ const Header = (props) => {
           size="large"
           className="search-input"
         />
-        <Badge count={5} overflowCount={99} size="small">
+        {/* <Badge count={5} overflowCount={99} size="small">
           <div className="wrap-icon">
             <BellOutlined />
           </div>
-        </Badge>
+        </Badge> */}
         <div className="wrap-icon">
           <SettingOutlined />
         </div>
@@ -109,7 +109,7 @@ const Header = (props) => {
             >
               <Avatar
                 size={48}
-                src={"https://co-coffeeshop.herokuapp.com" + user?.avatar}
+                src={"http://192.168.43.105:8080" + user?.avatar}
               />
             </Dropdown>
           </div>
