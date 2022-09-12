@@ -24,7 +24,9 @@ const OrderItem = (props) => {
           </div>
         </Col>
         <Col span={10}>
-          <div className=" product-item__content">{item.diaChiGiaoHang}</div>
+          <div className=" product-item__content">
+            {item.diaChiGiaoHang} aaaaaaaaaa
+          </div>
         </Col>
         <Col span={3}>
           <div className="sum-price product-item__content">
