@@ -1,136 +1,165 @@
-import {Spin, Col, Radio, message } from 'antd';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay } from 'swiper';
-import React, {useEffect, useState} from 'react';
-import {useParams, Link, useNavigate} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {getProductByIdStart, insertCartStart} from '../../redux';
+import { Spin, Col, Radio, message } from "antd";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Autoplay } from "swiper";
+import React, { useEffect, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductByIdStart, insertCartStart } from "../../redux";
+import { BASE_URL } from "../../../../core/constant";
 
-import './styles.scss';
+import "./styles.scss";
 
 const ProductPage = () => {
   SwiperCore.use([Autoplay]);
-  const {id} = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {status, data: {listProduct, productDetail}} = useSelector((state) => state.userPage);
-  const User = JSON.parse(localStorage.getItem('User'));
+  const {
+    status,
+    data: { listProduct, productDetail },
+  } = useSelector((state) => state.userPage);
+  const User = JSON.parse(localStorage.getItem("User"));
 
   const [sizeSelect, setSizeSelect] = useState(1);
   const [price, setPrice] = useState();
 
   useEffect(() => {
-    window.scrollTo(0,0);
-    if(id) {
+    window.scrollTo(0, 0);
+    if (id) {
       dispatch(getProductByIdStart(id));
     }
-  },[id]);
+  }, [id]);
 
   useEffect(() => {
-    switch(sizeSelect) {
+    switch (sizeSelect) {
       case 1:
-        return  setPrice(productDetail.giaBanSizeS);
+        return setPrice(productDetail.giaBanSizeS);
       case 2:
-        return  setPrice(productDetail.giaBanSizeM);
+        return setPrice(productDetail.giaBanSizeM);
       case 3:
-        return  setPrice(productDetail.giaBanSizeL);    
+        return setPrice(productDetail.giaBanSizeL);
       default:
-        return  setPrice(productDetail.giaBanSizeS);
+        return setPrice(productDetail.giaBanSizeS);
     }
-  },[sizeSelect, productDetail]);
+  }, [sizeSelect, productDetail]);
 
   const options = [
-    { label: 'S', value: 1 },
-    { label: 'M', value: 2 },
-    { label: 'L', value: 3 },
+    { label: "S", value: 1 },
+    { label: "M", value: 2 },
+    { label: "L", value: 3 },
   ];
 
   const onSelectSize = (size) => {
     setSizeSelect(size.target.value);
-  }
+  };
 
   const handleOrder = () => {
-    const user = JSON.parse(localStorage.getItem('User'));
-    if(user && productDetail) {
+    const user = JSON.parse(localStorage.getItem("User"));
+    if (user && productDetail) {
       const body = {
         idSanPham: productDetail?.id,
         kichCo: sizeSelect,
-        idNguoiDung: User.id
-      }
+        idNguoiDung: User.id,
+      };
       dispatch(insertCartStart(body));
     } else {
-      message.info('Vui lòng đăng nhập để thực hiện thao tác này.');
-      navigate('/login');
+      message.info("Vui lòng đăng nhập để thực hiện thao tác này.");
+      navigate("/login");
     }
-  }
+  };
 
-  console.log(JSON.parse(localStorage.getItem('listCart')))
+  console.log(JSON.parse(localStorage.getItem("listCart")));
 
   return (
     <div className="container-product-detail-page">
       <Spin spinning={status === "loading"}>
         <div className="container-product-detail-page_content">
-        <Col span={16}>
-          <div className="product-detail-title mb-1 ">{productDetail?.tenSanPham}</div>
-          <div className="row-content">
-            <div className="wrap-img">
-            <img src={`http://192.168.43.105:8080${productDetail.anh}`} alt={productDetail.tenSanPham} />
+          <Col span={16}>
+            <div className="product-detail-title mb-1 ">
+              {productDetail?.tenSanPham}
             </div>
-            <div className="wrap-content">
-              <div className="product-description">{productDetail?.moTa}</div>
-              <div className="btn-order" onClick={handleOrder}>
-                {/* <img src={btnImg} alt='ĐẶT MUA NGAY'/> */}
-                THÊM VÀO GIỎ
+            <div className="row-content">
+              <div className="wrap-img">
+                <img
+                  src={`${BASE_URL}${productDetail.anh}`}
+                  alt={productDetail.tenSanPham}
+                />
               </div>
-              <div className="product-option">
-                <div className="option-size">
-                  <div className="title">Size: </div>
-                  <Radio.Group options={options} onChange={onSelectSize} value={sizeSelect} optionType="button" />
+              <div className="wrap-content">
+                <div className="product-description">{productDetail?.moTa}</div>
+                <div className="btn-order" onClick={handleOrder}>
+                  {/* <img src={btnImg} alt='ĐẶT MUA NGAY'/> */}
+                  THÊM VÀO GIỎ
                 </div>
-                <div className="product-price">
-                  <span className="title">Giá: </span><strong>{(price)?.toLocaleString('vi', {style : 'currency', currency : 'VND'})}</strong>
+                <div className="product-option">
+                  <div className="option-size">
+                    <div className="title">Size: </div>
+                    <Radio.Group
+                      options={options}
+                      onChange={onSelectSize}
+                      value={sizeSelect}
+                      optionType="button"
+                    />
+                  </div>
+                  <div className="product-price">
+                    <span className="title">Giá: </span>
+                    <strong>
+                      {price?.toLocaleString("vi", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
+                    </strong>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="product-list">
-            <Swiper
-                  grabCursor={true}
-                  spaceBetween={30}
-                  modules={[Autoplay]}
-                  slidesPerView={4}
-                  autoplay={{ delay: 5000 }}
+            <div className="product-list">
+              <Swiper
+                grabCursor={true}
+                spaceBetween={30}
+                modules={[Autoplay]}
+                slidesPerView={4}
+                autoplay={{ delay: 5000 }}
               >
                 {listProduct.map((product, i) => (
-                    <SwiperSlide key={i}>
-                      <ProductCard product={product}></ProductCard>
-                    </SwiperSlide>
+                  <SwiperSlide key={i}>
+                    <ProductCard product={product}></ProductCard>
+                  </SwiperSlide>
                 ))}
-            </Swiper>
-          </div>
-        </Col>
+              </Swiper>
+            </div>
+          </Col>
         </div>
       </Spin>
     </div>
-  )
-}
+  );
+};
 
 export default ProductPage;
 
 const ProductCard = (props) => {
-  const {product} = props;
+  const { product } = props;
 
   return (
     <div className="product-item">
       <div className="wrap-img">
         <Link to={`/product/${product.id}`}>
-          <img src={`http://192.168.43.105:8080${product.anh}`} alt={product.tenSanPham} />
+          <img src={`${BASE_URL}${product.anh}`} alt={product.tenSanPham} />
         </Link>
       </div>
       <Link to={`/product/${product.id}`}>
-      <div className="product-name">{product.tenSanPham}</div>
+        <div className="product-name">{product.tenSanPham}</div>
       </Link>
-      <div className="product-price">Giá <span>: {(product.giaBanSizeS).toLocaleString('vi', {style : 'currency', currency : 'VND'})}</span></div>
+      <div className="product-price">
+        Giá{" "}
+        <span>
+          :{" "}
+          {product.giaBanSizeS.toLocaleString("vi", {
+            style: "currency",
+            currency: "VND",
+          })}
+        </span>
+      </div>
     </div>
-  )
-}
+  );
+};

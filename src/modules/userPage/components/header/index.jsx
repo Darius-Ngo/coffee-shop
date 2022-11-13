@@ -1,18 +1,19 @@
-import { Space, Avatar, Input, Dropdown, Menu, Badge, Spin } from "antd";
 import {
-  HomeOutlined,
   CommentOutlined,
-  TeamOutlined,
-  ShoppingCartOutlined,
+  HomeOutlined,
   ReadOutlined,
+  ShoppingCartOutlined,
+  TeamOutlined,
 } from "@ant-design/icons";
-import React, { useState, useEffect } from "react";
+import { Avatar, Badge, Dropdown, Input, Menu, Space } from "antd";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import CartSmall from "../CartSmall";
-import { getListCartStart, deleteCartStart } from "../../redux";
+import { BASE_URL } from "../../../../core/constant";
+import ChangePassForm from "../../../auth/ChangePass";
 import { logoutStart } from "../../../auth/redux";
-import ChangePassForm from '../../../auth/ChangePass';
+import { getListCartStart } from "../../redux";
+import CartSmall from "../CartSmall";
 import "./styles.scss";
 
 const Header = () => {
@@ -68,7 +69,7 @@ const Header = () => {
               className="menu-item"
               target="_blank"
               rel="noopener noreferrer"
-              onClick = {() => setShowModalChangPass(true)}
+              onClick={() => setShowModalChangPass(true)}
             >
               Đổi mật khẩu
             </div>
@@ -169,10 +170,7 @@ const Header = () => {
                 placement="bottomRight"
                 arrow={{ pointAtCenter: true }}
               >
-                <Avatar
-                  size={48}
-                  src={"http://192.168.43.105:8080" + user?.avatar}
-                />
+                <Avatar size={48} src={BASE_URL + user?.avatar} />
               </Dropdown>
             </div>
           </Space>
@@ -182,7 +180,10 @@ const Header = () => {
           </Link>
         )}
       </Space>
-      <ChangePassForm visible={showModalChangPass} onCancel={() => setShowModalChangPass(false)}/>
+      <ChangePassForm
+        visible={showModalChangPass}
+        onCancel={() => setShowModalChangPass(false)}
+      />
     </div>
   );
 };

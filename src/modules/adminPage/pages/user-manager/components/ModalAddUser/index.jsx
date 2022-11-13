@@ -20,6 +20,7 @@ import {
   getRegexMobile,
   getRegexPassword,
 } from "../../../../../common/regexCommon";
+import { BASE_URL } from "../../../../../../core/constant";
 import Modal from "../../../../../../components/Modal";
 
 const ModalAddUser = (props) => {
@@ -104,7 +105,7 @@ const ModalAddUser = (props) => {
   ];
 
   const uploadImage = async (options) => {
-    const UPLOAD_URL = "http://192.168.43.105:8080/api/uploads";
+    const UPLOAD_URL = BASE_URL + "/api/uploads";
     const { onSuccess, onError, file } = options;
     const fmData = new FormData();
     const config = {

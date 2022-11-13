@@ -1,8 +1,9 @@
-import { Space, Avatar, Input, Dropdown, Menu, Badge } from "antd";
-import { BellOutlined, MenuOutlined, SettingOutlined } from "@ant-design/icons";
+import { Space, Avatar, Input, Dropdown, Menu } from "antd";
+import { MenuOutlined, SettingOutlined } from "@ant-design/icons";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { BASE_URL } from "../../../../core/constant";
 import { loginStart } from "../../../auth/redux";
 import ChangePassForm from "../../../auth/ChangePass";
 import "./styles.scss";
@@ -109,7 +110,7 @@ const Header = (props) => {
             >
               <Avatar
                 size={48}
-                src={"http://192.168.43.105:8080" + user?.avatar}
+                src={BASE_URL + user?.avatar}
               />
             </Dropdown>
           </div>
