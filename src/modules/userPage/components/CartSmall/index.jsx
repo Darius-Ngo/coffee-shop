@@ -1,9 +1,10 @@
 import { Tooltip, Empty, Spin } from "antd";
 import { MdDeleteOutline } from "react-icons/md";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {getListCartStart, deleteCartStart} from '../../redux';
+import { deleteCartStart } from "../../redux";
+import { BASE_URL } from "../../../../core/constant";
 import "./styles.scss";
 
 const CartSmall = () => {
@@ -16,7 +17,7 @@ const CartSmall = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteCartStart(id));
-  }
+  };
 
   return (
     <div className="cart-wrap">
@@ -28,20 +29,35 @@ const CartSmall = () => {
               <div className="cart-item" key={index}>
                 <div className="cart-item__img">
                   <img
-                    src={"http://192.168.43.105:8080" + item?.sanPham.anh}
+                    src={BASE_URL + item?.sanPham.anh}
                     alt={item.sanPham.tenSanPham}
                   />
                 </div>
-                <div className="cart-item__content">{item?.sanPham?.tenSanPham}</div>
-                <div className="cart-item__price">{(item?.giaBan).toLocaleString('vi', {style : 'currency', currency : 'VND'})}</div>
+                <div className="cart-item__content">
+                  {item?.sanPham?.tenSanPham}
+                </div>
+                <div className="cart-item__price">
+                  {(item?.giaBan).toLocaleString("vi", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                </div>
                 <Tooltip placement="right" title="Xóa sản phẩm" color="#f5222d">
-                  <div className="cart-item__delete" onClick={() => handleDelete(item?.id)}>
+                  <div
+                    className="cart-item__delete"
+                    onClick={() => handleDelete(item?.id)}
+                  >
                     <MdDeleteOutline />
                   </div>
                 </Tooltip>
               </div>
             ))}
-          {!listCart.length && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={'Giỏ trống!'}/>}
+          {!listCart.length && (
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={"Giỏ trống!"}
+            />
+          )}
         </div>
         <div className="btn-order">
           <Link to={"/cart"}>

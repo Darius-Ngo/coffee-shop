@@ -3,6 +3,7 @@ import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { BASE_URL } from "../../../../../../core/constant";
 import { insertStart, updateStart } from '../../redux';
 import Modal from '../../../../../../components/Modal';
 
@@ -60,7 +61,7 @@ const ModalAddUser = (props) => {
     }
 
     const uploadImage = async (options) => {
-      const UPLOAD_URL = 'http://192.168.43.105:8080/api/uploads';
+      const UPLOAD_URL = BASE_URL+'/api/uploads';
         const { onSuccess, onError, file } = options;
         const fmData = new FormData();
         const config = {

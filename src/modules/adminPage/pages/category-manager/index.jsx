@@ -4,6 +4,7 @@ import confirm from 'antd/lib/modal/confirm';
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Header from './components/Header';
+import { BASE_URL } from "../../../../core/constant";
 import {getListStart, deleteStart} from './redux';
 import ModalAddCategory from './components/ModalAddCategory';
 import './styles.scss';
@@ -65,7 +66,7 @@ const CategoryManager = () => {
         <div className="text-center">
           <Image
             width={200}
-            src={'http://192.168.43.105:8080'+record}
+            src={BASE_URL+record}
           />
         </div>
       )
